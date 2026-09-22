@@ -502,59 +502,59 @@
   <div class="fig" style="margin-top:14px">
     <svg viewBox="0 0 1080 380" role="img" aria-label="3 检查点 × 2 叙述语言的命中最优率矩阵">
       <rect x="0" y="0" width="1080" height="380" fill="#fff"/>
-      <text x="20" y="26" font-size="14" font-weight="800" fill="#141414">同一个模型族换权重、换语言，成绩差四倍 · 命中最优技能的比例</text>
-      <text x="20" y="46" font-size="11.5" fill="#8A7443">同一批 122 个状态、同一套问题 ｜ 灰色参考线 = 逐命题查表法（不读状态只按命题选一个）</text>
+      <text x="20" y="26" font-size="14" font-weight="800" fill="#141414">同一个模型族换权重、换语言，成绩差八十倍 · 命中最优技能的比例</text>
+      <text x="20" y="46" font-size="11.5" fill="#8A7443">同一批 122 个状态、同一套问题 ｜ 横轴 0–0.90 ｜ 灰色虚线 = 逐命题查表法（不读状态，只按命题固定选一个）</text>
 
       <line x1="290" y1="62" x2="290" y2="330" stroke="#E3DCCB" stroke-width="1"/>
       <text x="290" y="348" font-size="11" fill="#8A7443" text-anchor="middle">0</text>
       <line x1="1000" y1="62" x2="1000" y2="330" stroke="#E3DCCB" stroke-width="1" stroke-dasharray="3 3"/>
-      <text x="1000" y="348" font-size="11" fill="#8A7443" text-anchor="middle">0.80</text>
+      <text x="1000" y="348" font-size="11" fill="#8A7443" text-anchor="middle">0.90</text>
 
-      <line x1="748" y1="62" x2="748" y2="330" stroke="#8A7443" stroke-width="1.5" stroke-dasharray="5 4"/>
-      <text x="752" y="76" font-size="11" fill="#6F6754" font-weight="700">查表法 0.754</text>
+      <line x1="885" y1="62" x2="885" y2="330" stroke="#8A7443" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="880" y="364" font-size="11" fill="#6F6754" font-weight="700" text-anchor="end">查表法 0.754（同一批状态）</text>
 
       <g font-size="12">
         <text x="20" y="94" fill="#B91C1C" font-weight="700">multilingual × zh（第一版用的格）</text>
         <rect x="290" y="82" width="710" height="16" rx="3" fill="#F0EBE0"/>
-        <rect x="290" y="82" width="276" height="16" rx="3" fill="#F87171"/>
-        <text x="580" y="95" font-size="12" font-weight="800" fill="#B91C1C">0.311</text>
+        <rect x="290" y="82" width="245" height="16" rx="3" fill="#F87171"/>
+        <text x="543" y="95" font-size="12" font-weight="800" fill="#B91C1C">0.311</text>
 
         <text x="20" y="126" fill="#B91C1C" font-weight="700">english × zh</text>
         <rect x="290" y="114" width="710" height="16" rx="3" fill="#F0EBE0"/>
-        <rect x="290" y="114" width="95" height="16" rx="3" fill="#F87171"/>
-        <text x="399" y="127" font-size="12" font-weight="800" fill="#B91C1C">0.107</text>
+        <rect x="290" y="114" width="84" height="16" rx="3" fill="#F87171"/>
+        <text x="382" y="127" font-size="12" font-weight="800" fill="#B91C1C">0.107</text>
 
         <text x="20" y="158" fill="#B91C1C" font-weight="700">typed-decisions × zh</text>
         <rect x="290" y="146" width="710" height="16" rx="3" fill="#F0EBE0"/>
-        <rect x="290" y="146" width="7" height="16" rx="3" fill="#F87171"/>
-        <text x="311" y="159" font-size="12" font-weight="800" fill="#B91C1C">0.008</text>
+        <rect x="290" y="146" width="6" height="16" rx="3" fill="#B91C1C"/>
+        <text x="304" y="159" font-size="12" font-weight="800" fill="#B91C1C">0.008</text>
 
         <text x="20" y="202" fill="#463814" font-weight="700">multilingual × en</text>
         <rect x="290" y="190" width="710" height="16" rx="3" fill="#F0EBE0"/>
-        <rect x="290" y="190" width="291" height="16" rx="3" fill="#86EFAC"/>
-        <text x="595" y="203" font-size="12" font-weight="800" fill="#15803D">0.328</text>
+        <rect x="290" y="190" width="259" height="16" rx="3" fill="#86EFAC"/>
+        <text x="557" y="203" font-size="12" font-weight="800" fill="#15803D">0.328</text>
 
         <text x="20" y="234" fill="#463814" font-weight="700">english × en</text>
         <rect x="290" y="222" width="710" height="16" rx="3" fill="#F0EBE0"/>
-        <rect x="290" y="222" width="378" height="16" rx="3" fill="#4ADE80"/>
-        <text x="682" y="235" font-size="12" font-weight="800" fill="#15803D">0.426</text>
+        <rect x="290" y="222" width="336" height="16" rx="3" fill="#4ADE80"/>
+        <text x="634" y="235" font-size="12" font-weight="800" fill="#15803D">0.426</text>
 
         <text x="20" y="266" fill="#15803D" font-weight="800">typed-decisions × en（最强格）</text>
         <rect x="290" y="254" width="710" height="16" rx="3" fill="#F0EBE0"/>
-        <rect x="290" y="254" width="596" height="16" rx="3" fill="#15803D"/>
-        <text x="900" y="267" font-size="12" font-weight="800" fill="#15803D">0.672</text>
+        <rect x="290" y="254" width="530" height="16" rx="3" fill="#15803D"/>
+        <text x="828" y="267" font-size="12" font-weight="800" fill="#15803D">0.672</text>
 
         <text x="20" y="312" fill="#463814" font-weight="700">随机抽一个</text>
         <rect x="290" y="300" width="710" height="16" rx="3" fill="#F0EBE0"/>
-        <rect x="290" y="300" width="99" height="16" rx="3" fill="#9CA3AF"/>
-        <text x="403" y="313" font-size="12" font-weight="800" fill="#5F5847">0.111</text>
+        <rect x="290" y="300" width="88" height="16" rx="3" fill="#9CA3AF"/>
+        <text x="386" y="313" font-size="12" font-weight="800" fill="#5F5847">0.111</text>
       </g>
 
       <rect x="20" y="356" width="1040" height="20" rx="5" fill="#FFFDF5"/>
-      <text x="30" y="370" font-size="11.5" fill="#8A6D1F" font-weight="700">换检查点 + 换语言把 0.311 抬到 0.672 —— 但查表法用一条「按命题固定」的规则仍有 0.754，仍胜过最强格</text>
+      <text x="30" y="370" font-size="11.5" fill="#8A6D1F" font-weight="700">换检查点 + 换语言把 0.008 抬到 0.672 —— 但查表法（不读状态）在同一批状态上就有 0.754，仍高过最强格</text>
     </svg>
     <div class="fc">这张图要读两件事。<b>第一，检查点和语言的影响极大</b>：同一个模型族、同一批状态，
-    最差格 0.008、最强格 0.672，差八十倍 —— 所以任何「Laya 能不能干这个」的结论，
+    最差格 0.008、最强格 0.672 —— 所以任何「Laya 能不能干这个」的结论，
     必须写清用的是哪个检查点、哪种语言，否则没有意义。<b>第二，绝对水平仍然不高</b>：
     灰色虚线是「查表法」——不读状态，只按命题名固定选一个技能，命中 <b>0.754</b>，
     比最强格的 Laya（0.672）还高。<b>这说明 Laya 的分数不是从「看状态做判断」挣来的。</b></div>
@@ -566,8 +566,11 @@
       把上面的选择<b>按命题切开</b>看，答案就很清楚了：
       每个命题内部的所有状态，它给出的是<b>同一个技能</b>。
       用 122 状态那批算：<b>状态盲率</b>（与该命题内众数选择相同的状态占比）
-      六格分别是 1.000 / 1.000 / 0.984 / 0.943 / 0.943 / 0.918 ——
-      命题内置信度极差普遍只有 0.002–0.03，也就是它<b>换状态不改答案、也不改把握程度</b>。</p>
+      六格分别是 1.000 / 1.000 / 0.984 / 0.943 / 0.943 / 0.918。
+      最强格（typed-decisions × en）的命题内置信度极差只有 <b>0.0009–0.0152</b> ——
+      换状态几乎不改答案、也不改把握程度；弱格的极差宽一些（multilingual×zh 最大 0.234、
+      multilingual×en 最大 0.287），但那个宽度<b>与对错无关甚至反向</b>
+      （multilingual×zh 错答平均 0.502 &gt; 对答 0.482），同样撑不起阈值。</p>
     <p style="font-size:13px;color:#5F5847;line-height:1.7;margin-top:9px">
       全 376 组上更彻底：<b>状态盲率 1.000</b>。逐命题看，它每个命题恒定选一个技能
       （<code>avoid_falling</code>/<code>hold_balance</code>/<code>stand_up</code> 恒选 stand，
@@ -578,7 +581,9 @@
       ball_kick_left 等 6 种）。<b>能从状态里读出来该换技能的时候，它一次都没换。</b></p>
     <p style="font-size:13px;color:#5F5847;line-height:1.7;margin-top:9px">
       这一条比「命中率低」更致命，因为它解释了命中率的来源：分数来自「按任务名猜一个默认技能」，
-      不是「看状态做判断」。最强格 0.672 里，<b>有 53 个状态是查表法对、它错；只有 4 个反过来</b>。</p>
+      不是「看状态做判断」。两批数据各自配对看都是同一个方向：
+      <b>122 状态批</b>（它 0.672、查表法 0.754）里查表法对而它错 <b>7</b> 个、它对而查表法错 <b>2</b> 个；
+      <b>全 376 组</b>（它 0.638、查表法 0.769）里是 <b>53 vs 4</b>。</p>
   </div>
 
   <div class="grid2" style="margin-top:14px">
@@ -637,8 +642,8 @@
       <rect x="20" y="62" width="330" height="126" rx="9" fill="#F0FDF4" stroke="#15803D" stroke-width="1.5"/>
       <text x="38" y="86" font-size="13" font-weight="800" fill="#15803D">C3 · 读得懂叙述吗</text>
       <text x="38" y="106" font-size="11" fill="#463814">把正确答案直接写进状态叙述，只考读取</text>
-      <text x="38" y="146" font-size="26" font-weight="800" fill="#15803D" font-family="ui-monospace,Menlo,monospace">0.79–1.00</text>
-      <text x="38" y="170" font-size="11" fill="#6F6754">六格区间 · 最强格 14/14 全对</text>
+      <text x="38" y="146" font-size="26" font-weight="800" fill="#15803D" font-family="ui-monospace,Menlo,monospace">0.50–1.00</text>
+      <text x="38" y="170" font-size="11" fill="#6F6754">六格区间 · 三格满分 14/14</text>
       <text x="38" y="184" font-size="11" fill="#6F6754">措辞没问题，状态叙述读得懂</text>
 
       <rect x="375" y="62" width="330" height="126" rx="9" fill="#FFFDF5" stroke="#E8B84B" stroke-width="1.5"/>
@@ -668,65 +673,80 @@
 
   <div class="grid2" style="margin-top:14px">
     <div class="card">
-      <div class="cap">置信度还能当闸门吗 · 在机器人域失效<span class="src">D 组 · 直接关系到卖点 S2</span></div>
+      <div class="cap">置信度还能当闸门吗 · 在最强配置下重测<span class="src">D 组 · 直接关系到卖点 S2</span></div>
       <table>
-        <tr><th>测什么</th><th class="mono">机器域</th><th class="mono">文本域</th></tr>
-        <tr><td>平均置信度</td><td class="mono">0.495</td><td class="mono">0.576</td></tr>
-        <tr><td>平均置信度 − 实际准确率</td><td class="mono neg">+0.262</td><td class="mono">−0.157</td></tr>
-        <tr><td>分桶后准确率单调？</td><td class="mono neg">否（0.00→0.25→0.00）</td><td class="mono neg">否（0.73→0.61→0.86→0.83）</td></tr>
-        <tr><td>垃圾 / 矛盾输入的 p(人工介入)</td><td class="mono neg">0.095–0.249</td><td class="mono">—</td></tr>
+        <tr><th>测什么</th><th class="mono">multilingual×zh</th><th class="mono">typed-decisions×en</th></tr>
+        <tr><td>平均置信度</td><td class="mono">0.495</td><td class="mono">0.117</td></tr>
+        <tr><td>置信度 − 实际准确率</td><td class="mono neg">+0.262（过度自信）</td><td class="mono">−0.57（严重不足）</td></tr>
+        <tr><td>分桶后准确率单调？</td><td class="mono neg">否（0.00→0.25→0.00）</td><td class="mono">是（0.56→0.74）</td></tr>
+        <tr><td>置信度可用区间</td><td class="mono">0.38–0.62（宽）</td><td class="mono neg">0.06–0.18（挤成一团）</td></tr>
+        <tr><td>垃圾 / 矛盾输入的 p(人工介入)</td><td class="mono neg">0.095–0.249</td><td class="mono neg">0.114–0.143</td></tr>
       </table>
       <ul class="tight">
-        <li><b>错答比答对更自信</b>：M1 里答对平均 conf 0.482，答错 0.502 —— 方向是反的。</li>
-        <li><b>给了弃权出口也不用</b>：明确列出「都不合适，需要人工介入」这个选项后，
-        垃圾输入（<code>asdf 9]【…%%%%</code>）与自相矛盾状态（「倾角 178 度同时稳定站立」）全部继续选技能，
-        p(弃权) 最高只到 0.249。</li>
-        <li><b>靶环过冲识别是常量</b>：问「此时前进能不能让进展为正」12 例，
-        模型 p 值<b>全部是 0.997</b>；3 例真值为「推过头倒扣分」全判成立。0.75 的准确率是基率伪影。</li>
+        <li><b>换配置后失效方式变了，但结论一样</b>：弱配置是<b>过度自信</b>（错答 0.502 &gt; 对答 0.482，
+        分桶非单调）；强配置是<b>置信度整体压到 0.06–0.18</b>，虽然排序单调，
+        但这个区间太窄，<b>没法当阈值用</b>——把闸门设在 0.5 就永远转人工，设在 0.15 就永远不转。</li>
+        <li><b>给了弃权出口也不用</b>（两种配置都一样）：明确列出「都不合适，需要人工介入」这个选项后，
+        垃圾输入（<code>asdf 9]…%%%%</code>）、纯符号、自相矛盾状态（「倾角 178 度同时稳定站立」）、
+        信息不足四种情况<b>全部继续选技能</b>，p(弃权) 只在 0.114–0.143 之间抖动，
+        比正常状态的 0.143 <b>还低或持平</b>。</li>
+        <li><b>靶环过冲识别是常量</b>（两种配置都一样）：问「此时前进能不能让进展为正」12 例，
+        模型 p 值全落在 <b>0.5554–0.5606</b>（极差 0.005）；
+        真值为「推过头倒扣分」的 3 例全判成立。0.75 的准确率是基率伪影。</li>
       </ul>
       <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
-        <b>这条直接限制卖点 S2 的适用范围</b>：本页第 05 节要讲的「转人工闸门」在文本域有实测支撑，
-        但<b>搬到机器人域不成立</b>。对外讲闸门卖点时，必须限定在文本判断场景。
+        <b>这条限制卖点 S2（转人工闸门）的适用范围</b>：本页第 05 节要讲的闸门在<b>文本判断场景</b>有实测支撑
+        （置信度能分桶、能定阈值），但<b>在机器人状态决策域不成立</b> ——
+        不是「置信度错」，是<b>它压根不随状态变化</b>。对外讲闸门卖点时，必须限定在文本判断场景。
       </div>
     </div>
 
     <div class="card">
       <div class="cap">同一批数据上，本机的 5.9K 判断头做到什么<span class="src">duck-autonomy/README + attribution.json</span></div>
       <table>
-        <tr><th>指标</th><th class="mono">Laya（421M · 文本）</th><th class="mono">判断头（5.9K · 数值）</th></tr>
-        <tr><td>留出集命中最优</td><td class="mono neg">0.298</td><td class="mono pos">0.648</td></tr>
-        <tr><td>P(成功) 校准后 ECE</td><td class="mono neg">分桶非单调</td><td class="mono pos">0.0261</td></tr>
+        <tr><th>指标</th><th class="mono">Laya 最强格</th><th class="mono">判断头（5.9K · 数值）</th></tr>
+        <tr><td>留出集命中最优</td><td class="mono neg">0.638</td><td class="mono pos">0.648</td></tr>
+        <tr><td>平均悔值</td><td class="mono neg">3.506</td><td class="mono">—</td></tr>
+        <tr><td>P(成功) 校准后 ECE</td><td class="mono neg">置信区间过窄不可用</td><td class="mono pos">0.0261</td></tr>
         <tr><td>P(不倒) 校准后 ECE</td><td class="mono neg">—</td><td class="mono pos">0.0045</td></tr>
         <tr><td>两项的准确率</td><td class="mono">—</td><td class="mono pos">95.8% / 99.1%</td></tr>
         <tr><td>输入形式</td><td class="mono neg">文本 ≤1024 token</td><td class="mono pos">22 维定长向量</td></tr>
-        <tr><td>单次前向</td><td class="mono neg">68 ms</td><td class="mono pos">微秒级</td></tr>
+        <tr><td>单次前向</td><td class="mono neg">~68 ms</td><td class="mono pos">微秒级</td></tr>
       </table>
       <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
-        可靠性两端档是真的：风险头说「不会倒」时 <b>99.8% 真不倒</b>（n=577），
-        说「会倒」时 <b>99.1% 真倒</b>（n=220）—— 概率能当风险预算用。
-        <span class="neg">但也要看另一面</span>：<code>attribution.json</code> 里
+        <b>命中率这一项现在打平了</b>（0.638 vs 0.648）—— 这也是返工后必须承认的：
+        第一版写「0.298 vs 0.648」把差距夸大了。真实差距在别处：
+        判断头吃 22 维数值、概率能当风险预算用（说「不会倒」时 <b>99.8% 真不倒</b>，n=577；
+        说「会倒」时 <b>99.1% 真倒</b>，n=220），而 Laya 的概率挤在 0.06–0.18 之间没有区分度。
+        <span class="neg">但判断头也不是全面胜出</span>：<code>attribution.json</code> 里
         靶环命题上判断层 progress 与「永远走」这条常数<b>完全相同</b>（+30.889），
         <code>avoid_falling</code> 上常数（+5.415）反而高于判断层（+4.341）。
-        <b>判断头不是全面胜出，它只在少数档上挣钱。</b>
+        <b>它只在少数档上挣钱。</b>
       </div>
     </div>
   </div>
 
   <div class="note">
-    <div class="lab">结论：在双足奖励场景里，Laya 不能胜任决策 —— 但这不是它的错位</div>
-    <p><b>四个层次全失效，而且失败方式是同一类</b>：直接决策退化成常量（373/376 选 walking，
-    与「恒选 walking」逐行相同）；把答案原样写进文本它也不做 argmax（0.279，比不泄题还差）；
-    置信度不再携带信息（错答 0.502 &gt; 对答 0.482），转人工闸门失效；给弃权出口也不使用。
-    最要紧的是<b>它选到负收益技能的比例高达 31.6%</b>，在「站起来」命题上到 90.3% ——
-    这不是「不够准」，是<b>在会摔死的状态上高置信地选错</b>。真机上这类错误不可逆。</p>
-    <p><b>失败点已被精确隔离到一处</b>：读得懂叙述（C3 24/24），但做不了数值比较
-    （C2 在 K=3 与 K=9 上都是 0/9）。而奖励场景的定义就是「给定数值化后果挑最大的」，
-    所以这不是调参能补的短板，是功能位缺失。</p>
+    <div class="lab">结论：放进双足奖励场景，Laya 不能胜任 —— 机制是「不看状态」，不是「不会算」</div>
+    <p><b>先说返工纠正了什么</b>：第一版用 multilingual + 中文，命中 0.298，归因是「缺数值比较功能位」。
+    补跑 3 检查点 × 2 语言后，最强格（typed-decisions × 英文）命中 <b>0.638</b>，
+    C2 数值比较从 0/9 变成 <b>7/9</b> —— <b>「缺功能位」这个归因被证伪</b>，
+    它是检查点与语言选错造成的。这一节把该错的都改了，包括那张把差距夸大的对比表。</p>
+    <p><b>但结论没变，机制换了</b>：真正的失败点是<b>状态不参与决策</b>。
+    按命题切开看，每个命题内部它恒定输出同一个技能 —— 状态盲率六格 0.918–1.000，全 376 组上是 <b>1.000</b>；
+    命题内置信度极差只有 0.002–0.03。而同命题的真最优技能有 <b>2–6 种</b>，
+    也就是「该换技能」的地方它一次都没换。于是分数等于「按任务名猜一个默认技能」：
+    <b>不读状态的查表法拿 0.754，反超最强格的 0.672</b>；配对上看，查表法对而它错的有 53 个状态，
+    它对而查表法错的只有 4 个。</p>
+    <p><b>为什么这在真机上致命</b>：它选到负收益技能的比例是 27.7%（最强格；弱配置 31.6%），
+    而弃权出口从不使用（p 恒在 0.12 附近）、过冲判断是常量（p 极差 0.005）、
+    概率区间挤到不可用作阈值。<b>系统没有任何一层能拦住这个错误</b>——
+    它会在「翻过去了 178 度」和「正常站立」上给出同一个技能、同一个把握程度。</p>
     <p><b>它该放在哪</b>：不进决策环，进<b>人机接口层</b> ——
     把人的一句自然语言（「把球推进环里，别推过头」）翻成结构化的
     <code>命题 = progress 函数 + success 谓词 + 场景绑定</code>，以及把新场景的状态量翻译成 schema。
-    这正是「自由文本进、封闭标签出」的形状，是它已经能做的事；
-    判断与选技能交给 22 维输入的小判断头。<b>两个模型各占各的位置，不要互相替代。</b></p>
+    这正是「自由文本进、封闭标签出」的形状，是它在 C3 上验证过的能力（读叙述 1.00）；
+    状态→技能的判断交给 22 维输入的小判断头。<b>两个模型各占各的位置，不要互相替代。</b></p>
   </div>
 </section>
 
@@ -759,8 +779,9 @@
         <div class="gap"><b>对照很关键</b>：同机测的 Von 准确率更高（18/18）但置信度<b>饱和</b>——
         垃圾输入仍维持 0.90，阈值形同虚设。<b>更准的模型反而做不了闸门。</b></div>
         <div class="gap" style="background:#FDF2F2"><b>适用范围必须写明</b>：第 04 节实测这条
-        <b>只在文本判断场景成立</b>。搬到机器人决策域后，置信度不再携带信息
-        （错答 0.502 &gt; 对答 0.482，分桶非单调），垃圾输入也不触发弃权 —— 那条线不能跟着搬。</div>
+        <b>只在文本判断场景成立</b>。搬到机器人决策域后，置信度失去信息量
+        （弱配置过度自信：错答 0.502 &gt; 对答 0.482、分桶非单调；强配置反向：整体压到 0.06–0.18
+        区间过窄不可作阈值），垃圾输入也从不触发弃权 —— 那条线不能跟着搬。</div>
       </div>
     </div>
 
@@ -981,6 +1002,9 @@
     专业域训不动的那两轮阴性结果不是失败，是<b>把「要攒多少数据」这个前提测清楚了</b>。</p>
     <p>第 04 节把机器人这条线单独判了：<b>Laya 不进决策环，进人机接口层</b>。
     决策环交给 22 维输入的小判断头（本机 5.9K 参数，留出集命中最优 0.648）。
+    <span class="warn">注意返工后的口径</span>：Laya 在机器人域的最强格命中已到 0.638，
+    与判断头 0.648 基本打平 —— <b>差距不在命中率，在「状态有没有参与决策」</b>：
+    Laya 状态盲率 1.000，判断头吃 22 维状态、概率能当风险预算用。
     两个模型各占各的位置 —— 这不是「Laya 不行」，是<b>把它放对了地方</b>。</p>
   </div>
 </section>
@@ -994,11 +1018,23 @@
   <code>laya_action_probe.py</code>（act 头）· <code>laya_output_quality.py</code>（乱码检测）·
   <code>laya_vs_rule_alert.py</code>（规则对照）。<br>
   <b>第 04 节（双足机器人）另有一组独立实测</b>，脚本在
-  <code>analysis/robot-decision-flywheel/</code>：
+  <code>analysis/robot-decision-flywheel/</code>。
+  <b>第一轮</b>（只用 multilingual 检查点 + 中文，结论归因已被后续推翻，保留作对照）：
   <code>laya_reward_decision_probe.py</code>（M1 直接决策 / M2 泄题读表 / M3 置信度分桶，376 个决策组）·
   <code>laya_reward_decision_probe2.py</code>（C1 位置对照 / C2 极简 argmax / C3 明写结论）·
   <code>laya_reward_decision_probe3.py</code>（D1 双域校准对拍 / D2 弃权 / D3 靶环过冲）。
+  <b>第二轮（返工，本节数字以此为准）</b>：
+  <code>probe4.py</code>（2 检查点 × 2 语言预检，暴露第一轮的归因问题）·
+  <code>probe5.py</code>（<b>3 检查点 × 2 语言全矩阵</b> C3/C2/M1/M2，本节主表来源）·
+  <code>probe6.py</code>（最强格与常数的配对 McNemar 检验，p&lt;0.0001）·
+  <code>probe7.py</code>（<b>状态盲率</b>：按命题切开看它是否随状态换技能，六格 0.918–1.000）·
+  <code>probe8.py</code>（输入形状对照：叙述句 / 结构化 JSON / 键值对，官方 JSON 用法也不改变结论）·
+  <code>probe9.py</code>（用第一版原测试重跑六格，「0/9」只在弱格出现）·
+  <code>probe10.py</code>（全 376 组 × 最强格的逐命题拆解 + 查表法与 oracle 基线）·
+  <code>probe11.py</code>（D 组在最强格复测）。
+  日志与结构化结果在 <code>runs/laya_ckpt_matrix_full.log|json</code> 等文件里，页面每个数字都能追到。
   真值来自 <code>analysis/microduck/duck-autonomy/data/*.jsonl</code>（MuJoCo 真跑，非人工标注）；
+  检查点规格（421M/322M、序列长度、官方基准差异）引自 HF 仓库自带 <code>README.md</code>；
   对照用的 5.9K 判断头数字引自该仓库 <code>README.md</code> 与 <code>data/attribution.json</code> 的本机实测，
   不是本次重跑，已在表内标注来源。<br>
   <b>口径纪律</b>：凡引用他人自述处一律实测校准或明确标注来源 ——
@@ -1008,8 +1044,12 @@
   中文路径仅 n=3，只证跑得通，不证准确率；成本换算为按公开标价与实测吞吐的【估】，非报价。<br>
   <b>第 04 节的边界声明</b>：机器人决策的结论只覆盖<b>小黄鸭（轮足）仿真里已有的 8 个命题、376 个决策组</b>，
   双足本体尚未接入（方案 A 的 P1 未产出双足策略集），故「Laya 在双足上不能胜任」是
-  <b>由同一形状的决策题外推</b>，不是双足真机实测；把状态翻译成叙述文本的措辞由本页脚本负责，
-  不同措辞可能小幅改变绝对数字，但 C2 的 0/9 与 M1 的常量行为在两种 K、两种问法下都复现。
+  <b>由同一形状的决策题外推</b>，不是双足真机实测；把状态翻译成叙述文本的措辞由本页脚本负责。
+  <b>本轮最需要记住的一条口径</b>：Laya 的成绩对<b>检查点与叙述语言极其敏感</b>（六格 0.008–0.672），
+  任何「Laya 能不能干 X」的结论都必须写清用的是哪个 ckpt、哪种语言、哪种输入形状 ——
+  第一版本节正是因为没写清而得出错误归因（已纠正）。<b>最稳的发现是「状态盲」本身</b>：
+  六格状态盲率 0.918–1.000（最强格与全 376 组均为 1.000）、3 种输入形状 0.975–1.000，
+  全部复现 —— 而<b>绝对命中率</b>随检查点、语言、措辞与抽样波动，不宜单独引用。
 </footer>
 
 </div>
