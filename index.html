@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laya 已能做什么 · 与由此推出的商业卖点</title>
+<meta name="description" content="Laya 决策模型的实测能力清单、做不到的边界、放进双足机器人奖励场景的实测裁决，以及由实测数字推出的三个商业卖点与两条落地路径。所有数字均为本机 2026-09-22 重跑实测。">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◧</text></svg>">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:#F3EFE7;color:#232323;
+       font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+       font-size:14.5px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 22px 70px;}
+
+  .topbar{position:sticky;top:0;z-index:99;background:#1C1B18;color:#FAF7F1;
+          box-shadow:0 2px 12px rgba(0,0,0,.25);}
+  .topbar-in{max-width:1180px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .brand{font-size:15.5px;font-weight:800;letter-spacing:.5px;white-space:nowrap;}
+  .brand em{color:#E8B84B;font-style:normal;}
+  .topbar nav{display:flex;gap:3px;flex-wrap:wrap;}
+  .topbar nav a{color:#CFC8B8;text-decoration:none;font-size:12.5px;padding:4px 9px;border-radius:13px;}
+  .topbar nav a:hover{background:#3A362C;color:#E8B84B;}
+  .topbar .src{margin-left:auto;font-size:11.5px;color:#A79E8B;white-space:nowrap;}
+
+  .hero{padding:34px 0 6px;}
+  .kicker{font-size:12px;letter-spacing:5px;color:#B45309;font-weight:700;}
+  h1{font-size:35px;line-height:1.3;margin:10px 0 12px;color:#141414;letter-spacing:-.5px;}
+  h1 .hl{background:linear-gradient(transparent 62%,#F5D97A 62%);padding:0 2px;}
+  .lede{font-size:16px;color:#4A4A4A;max-width:880px;}
+  .lede b{color:#B45309;}
+  .lede+.lede{margin-top:9px;}
+
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:22px 0 4px;}
+  .kpi{background:#fff;border-radius:12px;padding:13px 14px 11px;border:1px solid #E7E0D0;}
+  .kpi .v{font-size:24px;font-weight:800;color:#B45309;letter-spacing:-.8px;line-height:1.15;}
+  .kpi .v small{font-size:13px;font-weight:700;color:#8A7443;letter-spacing:0;}
+  .kpi .k{font-size:12px;color:#5F5847;margin-top:3px;}
+  .kpi.warn .v{color:#B91C1C;} .kpi.ok .v{color:#15803D;} .kpi.blue .v{color:#1D4ED8;}
+  .kpi .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:8px;
+            background:#EFE9DB;color:#8A7443;margin-left:4px;vertical-align:2px;}
+
+  section{margin-top:34px;scroll-margin-top:60px;}
+  h2{font-size:19px;font-weight:800;display:flex;align-items:baseline;gap:10px;
+     border-bottom:2px solid #232323;padding-bottom:7px;margin-bottom:14px;}
+  h2 .no{color:#B45309;font-size:13px;letter-spacing:1px;font-family:ui-monospace,Menlo,monospace;}
+  h2 .hint{margin-left:auto;font-size:12px;color:#6F6754;font-weight:400;}
+  h3{font-size:14px;font-weight:800;margin:16px 0 8px;color:#141414;}
+  h3::before{content:"▮";color:#B45309;font-size:10px;margin-right:7px;vertical-align:1px;}
+
+  .card{background:#fff;border:1px solid #E3DCCB;border-radius:11px;padding:15px 17px;}
+  .card .cap{font-size:13.5px;font-weight:800;color:#463814;margin-bottom:10px;
+             padding-bottom:7px;border-bottom:1px dashed #E3DCCB;display:flex;gap:8px;align-items:baseline;}
+  .card .cap .src{margin-left:auto;font-size:11px;color:#8A7443;font-weight:400;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start;}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;align-items:start;}
+  .g23{display:grid;grid-template-columns:1.35fr 1fr;gap:14px;align-items:start;}
+  .g32{display:grid;grid-template-columns:1fr 1.35fr;gap:14px;align-items:start;}
+  @media(max-width:960px){.grid2,.grid3,.g23,.g32{grid-template-columns:1fr;}.kpis{grid-template-columns:repeat(2,1fr);}}
+
+  /* 能力清单 */
+  .abl{display:flex;flex-direction:column;gap:9px;}
+  .am{background:#fff;border:1px solid #E3DCCB;border-left:5px solid #15803D;border-radius:9px;
+      padding:11px 14px;display:grid;grid-template-columns:26px 1fr auto;gap:12px;align-items:start;}
+  .am.no{border-left-color:#B91C1C;}
+  .am.mid{border-left-color:#D97706;}
+  .am .id{font-size:15px;font-weight:800;color:#15803D;font-family:ui-monospace,Menlo,monospace;}
+  .am.no .id{color:#B91C1C;} .am.mid .id{color:#D97706;}
+  .am .t{font-size:14px;font-weight:800;color:#141414;}
+  .am .d{font-size:12.5px;color:#5F5847;margin-top:2px;}
+  .am .ev{font-size:11.5px;margin-top:5px;padding:5px 9px;background:#FAF7F1;border-radius:6px;
+          color:#463814;font-family:ui-monospace,Menlo,monospace;line-height:1.55;}
+  .am .pct{text-align:right;white-space:nowrap;}
+  .am .pct b{display:block;font-size:18px;color:#15803D;font-weight:800;letter-spacing:-.5px;}
+  .am.no .pct b{color:#B91C1C;} .am.mid .pct b{color:#D97706;}
+  .am .pct span{font-size:10.5px;color:#8A7443;}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{background:#EFE9DB;color:#463814;font-weight:800;text-align:left;padding:7px 10px;
+     border-bottom:1px solid #E3DCCB;font-size:12.5px;}
+  td{padding:7px 10px;border-bottom:1px solid #F0EBE0;vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  td.mono,th.mono{font-family:ui-monospace,Menlo,monospace;font-size:12px;}
+  .pos{color:#15803D;font-weight:800;} .neg{color:#B91C1C;font-weight:800;}
+  .est{color:#8A7443;font-size:11.5px;}
+
+  .bars{display:flex;flex-direction:column;gap:7px;}
+  .bar{display:grid;grid-template-columns:132px 1fr 84px;gap:9px;align-items:center;font-size:12.5px;}
+  .bar .lab{color:#5F5847;text-align:right;font-size:12px;}
+  .bar .track{height:19px;background:#F0EBE0;border-radius:5px;overflow:hidden;position:relative;}
+  .bar .fill{height:100%;border-radius:5px;}
+  .bar .val{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#232323;font-weight:700;}
+  .f-red{background:linear-gradient(90deg,#DC2626,#F87171);}
+  .f-green{background:linear-gradient(90deg,#15803D,#4ADE80);}
+  .f-amber{background:linear-gradient(90deg,#B45309,#E8B84B);}
+  .f-grey{background:linear-gradient(90deg,#9CA3AF,#D1D5DB);}
+  .f-blue{background:linear-gradient(90deg,#1D4ED8,#60A5FA);}
+
+  .fig{background:#fff;border:1px solid #E3DCCB;border-radius:11px;padding:14px 16px 12px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .fig .fc{font-size:12px;color:#6F6754;margin-top:9px;padding-top:8px;border-top:1px dashed #E3DCCB;line-height:1.55;}
+  .fig .fc b{color:#B45309;}
+
+  .note{background:#232323;color:#FAF7F1;border-radius:11px;padding:15px 19px;margin-top:14px;}
+  .note .lab{font-size:11px;letter-spacing:3px;color:#E8B84B;font-weight:700;margin-bottom:7px;}
+  .note p{font-size:14px;line-height:1.65;}
+  .note p+p{margin-top:8px;}
+  .note b{color:#E8B84B;}
+  .note .warn{color:#FCA5A5;font-weight:700;}
+
+  /* 卖点卡 */
+  .sell{background:#fff;border:1px solid #E3DCCB;border-radius:11px;overflow:hidden;}
+  .sell .hd{background:#232323;color:#FAF7F1;padding:11px 16px;display:flex;align-items:baseline;gap:10px;}
+  .sell .hd .n{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#E8B84B;letter-spacing:1px;}
+  .sell .hd .t{font-size:15px;font-weight:800;}
+  .sell .bd{padding:13px 16px 15px;}
+  .sell .claim{font-size:14.5px;font-weight:700;color:#B45309;line-height:1.5;margin-bottom:9px;}
+  .sell .why{font-size:12.5px;color:#5F5847;line-height:1.62;}
+  .sell .why+.why{margin-top:7px;}
+  .sell .why b{color:#141414;}
+  .sell .gap{margin-top:10px;padding:9px 11px;background:#FDF6E3;border-radius:7px;font-size:12.5px;
+             color:#463814;line-height:1.6;}
+  .sell .gap b{color:#B45309;}
+
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:9px;
+        background:#E7E0D0;color:#463814;margin:0 3px 3px 0;}
+  .pill.g{background:#DCFCE7;color:#15803D;} .pill.r{background:#FEE2E2;color:#B91C1C;}
+  .pill.b{background:#DBEAFE;color:#1D4ED8;} .pill.a{background:#FEF3C7;color:#92400E;}
+
+  ul.tight{margin:6px 0 0 18px;font-size:12.5px;color:#5F5847;line-height:1.65;}
+  ul.tight li{margin-bottom:3px;}
+  ul.tight b{color:#141414;}
+
+  footer{margin-top:44px;padding-top:16px;border-top:2px solid #232323;font-size:12px;color:#6F6754;line-height:1.75;}
+  footer b{color:#232323;}
+  footer code{font-family:ui-monospace,Menlo,monospace;background:#EFE9DB;padding:1px 5px;border-radius:4px;font-size:11.5px;}
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <div class="brand">Laya <em>已能做什么</em></div>
+  <nav>
+    <a href="#s1">能力边界</a>
+    <a href="#s2">已能做的事</a>
+    <a href="#s3">做不到</a>
+    <a href="#s4">双足机器人</a>
+    <a href="#s5">三个卖点</a>
+    <a href="#s6">两条路径</a>
+    <a href="#s7">先做哪个</a>
+  </nav>
+  <div class="src">全部数字 = 本机 2026-09-22 重跑实测</div>
+</div></div>
+
+<div class="wrap">
+
+<div class="hero">
+  <div class="kicker">实测能力清单 · 商业卖点推导</div>
+  <h1>它<span class="hl">已经能做的事</span>只有一类<br>但这一类足够撑起三条产品线</h1>
+  <p class="lede">前面几轮都在说 Laya <b>做不到</b>什么（画不了板、定不了级、打不过规则）。
+  这一篇反过来：把它<b>已经能做的事</b>逐条列出，每条配本机实测数字，再由此推商业卖点。</p>
+  <p class="lede">一句话定位：<b>Laya 不是「更小的 LLM」，是一个校准过的决策函数</b>——
+  输入文本 + 封闭选项，输出带概率的标签，一次前向算完。它的价值不在准确率上限，
+  在「知道自己什么时候不确定」，以及「固定硬件成本、数据不出域」。</p>
+</div>
+
+<div class="kpis">
+  <div class="kpi ok"><div class="v">22.7<small> 次/秒</small></div><div class="k">本机 MPS 吞吐<br>8.2 万次/小时</div></div>
+  <div class="kpi"><div class="v">20<small> ms</small></div><div class="k">单条稳态延迟<br>比云端 API 一个往返还快</div></div>
+  <div class="kpi blue"><div class="v">0.013</div><div class="k">垃圾输入上的置信度<br>塌下去，不是虚高</div></div>
+  <div class="kpi"><div class="v">2.2<small> GB</small></div><div class="k">权重体积<br>Apache 2.0 可商用</div></div>
+  <div class="kpi ok"><div class="v">13.5<small> ms/问</small></div><div class="k">一次问 10 个问题<br>单问成本降 48%</div></div>
+</div>
+
+<!-- ══════════ 01 ══════════ -->
+<section id="s1">
+  <h2><span class="no">01</span>能力边界：三原语，一次前向<span class="hint">不是「小 LLM」，形状完全不同</span></h2>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="cap">它不是这么工作的<span class="src">对照自回归 LLM</span></div>
+      <table>
+        <tr><th style="width:26%">维度</th><th>自回归 LLM</th><th>Laya</th></tr>
+        <tr><td>输出</td><td>逐 token 生成的自由文本，再解析</td><td class="pos">封闭选项上的概率分布</td></tr>
+        <tr><td>格式错</td><td>可能跳出 schema、编字段</td><td class="pos">结构上不可能</td></tr>
+        <tr><td>不确定性</td><td>要额外问，且常过度自信</td><td class="pos">每条自带校准置信度</td></tr>
+        <tr><td>多问题</td><td>N 个问题 ≈ N 轮生成</td><td class="pos">一次前向并行算完</td></tr>
+        <tr><td>输入上限</td><td>很长</td><td class="neg">512 token（英文）/ 1024（多语言）</td></tr>
+        <tr><td>输出内容</td><td>任意文本</td><td class="neg">只有标签，没有解释、没有几何、没有文件</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="cap">它的形状决定了它的用途<span class="src">从上面这张表直接推出</span></div>
+      <p style="font-size:13px;color:#5F5847;line-height:1.7">
+        把表格右列连起来读：<b>输入短、输出封闭、结构不会错、自己知道有多不确定、一次能问一整套</b>。
+        这不是「一个能力弱一点的模型」，而是一个<b>函数</b> —— 签名是
+        <code style="font-family:ui-monospace,Menlo,monospace;background:#EFE9DB;padding:1px 5px;border-radius:4px;font-size:12px">f(文本, 封闭选项) → 带概率的标签</code>。
+      </p>
+      <p style="font-size:13px;color:#5F5847;line-height:1.7;margin-top:9px">
+        这个签名能覆盖的业务判断很明确：<b>分类、路由、打分、放行/拦截、继续/停止</b>。
+        覆盖不了的也很明确：<b>要解释、要生成、要计算、要看图</b> ——
+        后面这几类一点忙都帮不上，别浪费时间去试。
+      </p>
+      <p style="font-size:13px;color:#B45309;line-height:1.7;margin-top:9px;font-weight:700">
+        下一节开始，逐条列出它在能覆盖的那部分里已经做到什么程度。
+      </p>
+    </div>
+  </div>
+
+  <div class="fig" style="margin-top:14px">
+    <svg viewBox="0 0 1080 300" role="img" aria-label="Laya 三种输出原语的真实返回结构">
+      <rect x="0" y="0" width="1080" height="300" fill="#fff"/>
+      <!-- choice -->
+      <rect x="12" y="10" width="1056" height="88" rx="8" fill="#F7FBF8" stroke="#15803D" stroke-width="1.4"/>
+      <text x="30" y="35" font-size="13" font-weight="800" fill="#15803D">choice · 从给定选项里选一个</text>
+      <text x="30" y="57" font-size="11.5" font-family="ui-monospace,Menlo,monospace" fill="#463814">"choice": "signal"&nbsp;&nbsp;&nbsp;"confidence": 0.686&nbsp;&nbsp;&nbsp;"probabilities": {"signal": 0.79, "notice": 0.21}</text>
+      <text x="30" y="80" font-size="11.5" fill="#8A7443">全选项概率都给 —— 可以自己再算 margin、熵，或做多级阈值分流</text>
+      <!-- score -->
+      <rect x="12" y="106" width="1056" height="88" rx="8" fill="#FFFBF2" stroke="#B45309" stroke-width="1.4"/>
+      <text x="30" y="131" font-size="13" font-weight="800" fill="#B45309">score · 按你给的等级打分</text>
+      <text x="30" y="153" font-size="11.5" font-family="ui-monospace,Menlo,monospace" fill="#463814">"score": 1.44&nbsp;&nbsp;&nbsp;"confidence": 0.142&nbsp;&nbsp;&nbsp;"legend": {"0":"不紧急","1":"稍急","2":"紧急"}</text>
+      <text x="30" y="176" font-size="11.5" fill="#8A7443">等级的文字含义由你定义 —— 换业务只换 legend，不用换模型</text>
+      <!-- noul -->
+      <rect x="12" y="202" width="1056" height="86" rx="8" fill="#F5F8FF" stroke="#1D4ED8" stroke-width="1.4"/>
+      <text x="30" y="227" font-size="13" font-weight="800" fill="#1D4ED8">noul · 一个命题成立的概率（单个数字）</text>
+      <text x="30" y="249" font-size="11.5" font-family="ui-monospace,Menlo,monospace" fill="#463814">"noul": 0.8430&nbsp;&nbsp;&nbsp;"confidence": 0.8430&nbsp;&nbsp;&nbsp;// 命题：「这条消息是否要求退款」</text>
+      <text x="30" y="272" font-size="11.5" fill="#8A7443">最便宜的形态：只要一个是/否 + 把握程度</text>
+    </svg>
+    <div class="fc">上为<b>本机真实返回</b>（<code>laya_demo.py</code> 输出），非示意。三原语就这三种，
+    所有业务判断都得先翻译成其中一种 —— <b>这是它的限制，也是它可靠的原因</b>：
+    没有地方可以「自由发挥」，也就没有地方可以「跳出格式」。</div>
+  </div>
+
+
+  <div class="grid3" style="margin-top:14px">
+    <div class="card">
+      <div class="cap">延迟：多问摊薄<span class="src">laya_multiq_bench.py</span></div>
+      <div class="bars">
+        <div class="bar"><div class="lab">问 1 个</div><div class="track"><div class="fill f-grey" style="width:100%"></div></div><div class="val">25.8 ms</div></div>
+        <div class="bar"><div class="lab">问 4 个</div><div class="track"><div class="fill f-blue" style="width:69%"></div></div><div class="val">17.9 ms</div></div>
+        <div class="bar"><div class="lab">问 10 个</div><div class="track"><div class="fill f-green" style="width:52%"></div></div><div class="val">13.5 ms</div></div>
+      </div>
+      <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
+        同一次调用里问 10 个问题，墙钟 135 ms —— <b>单问成本降 48%</b>。
+        这是与自回归模型的<b>结构性差异</b>，不是工程优化。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cap">吞吐：固定硬件成本<span class="src">laya_throughput_bench.py</span></div>
+      <div class="bars">
+        <div class="bar"><div class="lab">100 条串行</div><div class="track"><div class="fill f-amber" style="width:100%"></div></div><div class="val">4.41 s</div></div>
+        <div class="bar"><div class="lab">每秒</div><div class="track"><div class="fill f-green" style="width:23%"></div></div><div class="val">22.7 次</div></div>
+        <div class="bar"><div class="lab">每小时</div><div class="track"><div class="fill f-green" style="width:100%"></div></div><div class="val">8.2 万次</div></div>
+      </div>
+      <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
+        这是<b>单条串行</b>的数字，未做批处理。硬件成本固定：跑 1 万次和跑 1000 万次，
+        机器是同一台 —— 边际成本只有电。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cap">中文可用性（本机实测跑通）<span class="src">Router(preload=True)</span></div>
+      <table>
+        <tr><th>输入</th><th class="mono">紧急度</th><th class="mono">需人工</th></tr>
+        <tr><td>accepted 超时已 failed</td><td class="mono">1.42</td><td class="mono">0.983</td></tr>
+        <tr><td>巡检完成无异常</td><td class="mono">1.25</td><td class="mono">0.004</td></tr>
+        <tr><td>内存升高疑似泄漏</td><td class="mono">1.87</td><td class="mono">0.863</td></tr>
+      </table>
+      <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
+        <b>判据也可以写中文</b>，三例全部路由到 multilingual 分支，输出方向正确。
+        代价：预载 59 s（一次性），之后 19–371 ms/条。
+        <span class="est">注：n=3，只证「跑得通」，不证准确率。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 02 ══════════ -->
+<section id="s2">
+  <h2><span class="no">02</span>已经能做的事：五条，每条配实测<span class="hint">全部本机跑过，非 README 转述</span></h2>
+
+  <div class="abl">
+    <div class="am">
+      <div class="id">A1</div>
+      <div>
+        <div class="t">封闭选项分类 —— 且零样本就能用</div>
+        <div class="d">18 条手写标签的 4 类客服意图，未做任何微调。唯一错例是一条询价被分到 billing。</div>
+        <div class="ev">准确率 17/18 = 0.944 &nbsp;|&nbsp; 平均置信度 0.392（实际准确率 0.944 → 偏保守 −0.552）</div>
+      </div>
+      <div class="pct"><b>94.4%</b><span>零样本</span></div>
+    </div>
+
+    <div class="am">
+      <div class="id">A2</div>
+      <div>
+        <div class="t">置信度是诚实的 —— 可以当阈值用</div>
+        <div class="d">垃圾输入上置信度<b>塌到 0.01–0.03</b>，而不是硬给一个答案。分桶后准确率单调。</div>
+        <div class="ev">conf&lt;0.3 n=9 → 正确率 0.89 &nbsp;|&nbsp; conf 0.3–0.6 n=2 → 1.00 &nbsp;|&nbsp; conf≥0.6 n=7 → 1.00<br>"Hello." → conf 0.013 &nbsp;·&nbsp; "test test test" → conf 0.027</div>
+      </div>
+      <div class="pct"><b>0.013</b><span>垃圾输入置信度</span></div>
+    </div>
+
+    <div class="am">
+      <div class="id">A3</div>
+      <div>
+        <div class="t">同信息量下，比关键词规则强一档</div>
+        <div class="d">81 条真实归档消息，二分类。同一份正文，模型 vs 正则关键词 —— 这才是公平对比。</div>
+        <div class="ev">Laya（仅正文）77/81 = 0.9506 &nbsp;vs&nbsp; 关键词规则（仅正文）65/81 = 0.8025 &nbsp;→&nbsp; +12 条<br><span style="color:#B91C1C">但：有 frontmatter 元数据时，规则 81/81 = 1.0000</span></div>
+      </div>
+      <div class="pct"><b>+12</b><span>条，同信息量</span></div>
+    </div>
+
+    <div class="am">
+      <div class="id">A4</div>
+      <div>
+        <div class="t">多问题并行 —— 一次调用答完一整套判断</div>
+        <div class="d">一份输入同时问「哪个部门 / 多急 / 要不要退款 / 流失风险 / 含不含敏感信息」。</div>
+        <div class="ev">n=10 一次调用 135 ms = 13.5 ms/问（n=1 时 25.8 ms/问）</div>
+      </div>
+      <div class="pct"><b>13.5<span style="font-size:12px">ms</span></b><span>每问（N=10）</span></div>
+    </div>
+
+    <div class="am">
+      <div class="id">A5</div>
+      <div>
+        <div class="t">完全本地、可商用、数据不出域</div>
+        <div class="d">Apache 2.0，2.2 GB 权重，本机 MPS 跑；中文走 multilingual 分支，无需外部 API。</div>
+        <div class="ev">22.7 次/秒 · 8.2 万次/小时 · 预载 23 s（英文）/ 59 s（多语言，一次性）</div>
+      </div>
+      <div class="pct"><b>2.2<span style="font-size:12px">GB</span></b><span>Apache 2.0</span></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <div class="lab">这五条的共同形状</div>
+    <p>它们全都落在同一个形状里：<b>输入是自由文本、输出是封闭集合、判据由你写死</b>。
+    只要你的业务判断能塞进这个形状，Laya 就能干；塞不进去（要解释、要生成、要计算、要看图），它一点忙都帮不上。</p>
+    <p>反过来说：<span class="warn">这个形状恰好覆盖了 Agent 工作流里 80% 的「小判断」</span>——
+    分类、路由、打分、放行/拦截、继续/停止。这些判断单独看不难，但一旦高频，成本和延迟就堆起来了。</p>
+  </div>
+</section>
+
+<!-- ══════════ 03 ══════════ -->
+<section id="s3">
+  <h2><span class="no">03</span>做不到的：四个实测反证<span class="hint">这些边界决定了卖点能怎么讲</span></h2>
+
+  <div class="fig">
+    <svg viewBox="0 0 1080 300" role="img" aria-label="五个判断场地上 Laya 与规则的实测对比">
+      <rect x="0" y="0" width="1080" height="300" fill="#fff"/>
+      <text x="20" y="26" font-size="14" font-weight="800" fill="#141414">五个真实判断场地 · 谁赢</text>
+      <text x="20" y="46" font-size="11.5" fill="#8A7443">横轴 = 准确率；深色 = 胜者。绿色为规则胜，红色为模型败，蓝色为「有元数据时规则满分」</text>
+
+      <!-- 轴 -->
+      <line x1="300" y1="60" x2="300" y2="272" stroke="#E3DCCB" stroke-width="1"/>
+      <line x1="880" y1="60" x2="880" y2="272" stroke="#E3DCCB" stroke-width="1"/>
+      <text x="300" y="288" font-size="11" fill="#8A7443" text-anchor="middle">0</text>
+      <text x="880" y="288" font-size="11" fill="#8A7443" text-anchor="middle">1.0</text>
+
+      <g font-size="12">
+        <!-- row 1 -->
+        <text x="20" y="84" fill="#463814" font-weight="700">中文意图路由</text>
+        <rect x="300" y="70" width="580" height="15" rx="3" fill="#F0EBE0"/>
+        <rect x="300" y="70" width="319" height="15" rx="3" fill="#F87171"/>
+        <text x="627" y="82" font-size="11" fill="#B91C1C" font-weight="700">Laya 0.550</text>
+        <rect x="300" y="88" width="567" height="15" rx="3" fill="#4ADE80"/>
+        <text x="875" y="100" font-size="11" fill="#15803D" font-weight="700" text-anchor="end">hybrid 0.977</text>
+
+        <!-- row 2 -->
+        <text x="20" y="140" fill="#463814" font-weight="700">消息分级·同信息量</text>
+        <rect x="300" y="126" width="580" height="15" rx="3" fill="#F0EBE0"/>
+        <rect x="300" y="126" width="551" height="15" rx="3" fill="#4ADE80"/>
+        <text x="859" y="138" font-size="11" fill="#15803D" font-weight="700" text-anchor="end">Laya 0.951</text>
+        <rect x="300" y="144" width="466" height="15" rx="3" fill="#D1D5DB"/>
+        <text x="774" y="156" font-size="11" fill="#5F5847" font-weight="700">关键词 0.803</text>
+
+        <!-- row 3 -->
+        <text x="20" y="196" fill="#463814" font-weight="700">消息分级·有元数据</text>
+        <rect x="300" y="182" width="580" height="15" rx="3" fill="#F0EBE0"/>
+        <rect x="300" y="182" width="580" height="15" rx="3" fill="#60A5FA"/>
+        <text x="868" y="194" font-size="11" fill="#1D4ED8" font-weight="700" text-anchor="end">规则 1.000</text>
+        <text x="300" y="212" font-size="11.5" fill="#B91C1C">↑ 只要字段里有 type，两行 if 就满分 —— 模型在这块没有发挥空间</text>
+
+        <!-- row 4 -->
+        <text x="20" y="248" fill="#463814" font-weight="700">乱码检测</text>
+        <rect x="300" y="234" width="580" height="15" rx="3" fill="#F0EBE0"/>
+        <rect x="300" y="234" width="151" height="15" rx="3" fill="#F87171"/>
+        <text x="459" y="246" font-size="11" fill="#B91C1C" font-weight="700">Laya 0.260</text>
+        <rect x="300" y="252" width="580" height="15" rx="3" fill="#4ADE80"/>
+        <text x="868" y="264" font-size="11" fill="#15803D" font-weight="700" text-anchor="end">正则 1.000</text>
+      </g>
+
+      <!-- row 5 note -->
+      <rect x="20" y="272" width="1040" height="22" rx="5" fill="#FDF2F2"/>
+      <text x="30" y="287" font-size="11.5" fill="#B91C1C" font-weight="700">第 5 个场地 · EDA 缺陷定级：阻断命中率 0.00 —— 两轮微调前后完全一样，模型没学会区分严重度</text>
+    </svg>
+    <div class="fc">五个场地摊开看，规律很清楚：<b>只要数据里带结构化元数据，规则就赢</b>。
+    Laya 只在「正文里没元数据、又必须读语义」时胜出 —— 也就是第 2 行那一格。</div>
+  </div>
+
+  <div class="abl" style="margin-top:14px">
+    <div class="am no">
+      <div class="id">N1</div>
+      <div>
+        <div class="t">中文意图路由 —— 结构性打不过现成方案</div>
+        <div class="d">三轮变量隔离（换 checkpoint / 判据改中文 / 判据压短）都救不回。</div>
+        <div class="ev">Laya 55.0% vs hybrid_router 97.67%（test 卷 129 条）<br>换多语言 checkpoint → 44.2%，更差</div>
+      </div>
+      <div class="pct"><b>−42.6<span style="font-size:12px">pt</span></b><span>vs 生产</span></div>
+    </div>
+
+    <div class="am no">
+      <div class="id">N2</div>
+      <div>
+        <div class="t">乱码/损坏文本检测 —— 低于多数类基线</div>
+        <div class="d">真值不是主观的：连续 ASCII 问号、<code>[START]</code> 工具包装噪声。</div>
+        <div class="ev">Laya 52/200 = 0.260 &nbsp;vs&nbsp; 一条正则 200/200 = 1.000<br>多数类基线 0.805 —— 模型比「全判正常」还差</div>
+      </div>
+      <div class="pct"><b>0.260</b><span>vs 正则 1.000</span></div>
+    </div>
+  </div>
+
+  <div class="grid2" style="margin-top:9px">
+    <div class="am no">
+      <div class="id">N3</div>
+      <div>
+        <div class="t">专业域定级（EDA 缺陷严重度）—— 两轮微调都失败</div>
+        <div class="d">第一轮模板合成数据过拟合模板；第二轮真实数据 32 条 / 18 类，量级不够。</div>
+        <div class="ev">模板留出 0.39→0.94 但真实留出 0.20→0.20，<b>阻断捕获 0.40→0.00</b>（安全指标恶化）<br>第二轮 LOCO 18 折：acc 0.083→0.185，但 MAE 1.28→<b>1.45 更差</b>，阻断命中 0.00→0.00</div>
+      </div>
+      <div class="pct"><b>0.00</b><span>阻断命中</span></div>
+    </div>
+
+    <div class="am mid">
+      <div class="id">N4</div>
+      <div>
+        <div class="t">自带 action 头是装饰，不能当第二道闸门</div>
+        <div class="d">每条答案都附 <code>action.act_probability</code>，看起来像「该不该动手」的二分类信号。</div>
+        <div class="ev">6 条输入（含 3 条垃圾输入）实测全部 = <b>1.000</b>，恒为常量</div>
+      </div>
+      <div class="pct"><b>1.000</b><span>恒值</span></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <div class="lab">边界纪律（写进任何对外材料前先读这条）</div>
+    <p>我一度拿「Laya 只看正文 97.47%」去比「多数类基线 51.9%」，得出「比基线高 45.6pt，可用」。
+    <span class="warn">这是错的方法论</span>——因为同一批消息的 frontmatter 里本来就有 <code>type</code> 字段，
+    两行 if 能拿 100%。</p>
+    <p><b>对照必须信息量对齐。</b>任何模型都能在「和什么都不做比」时显得很强。
+    本页所有对比都按这个纪律重做过。</p>
+  </div>
+</section>
+
+<!-- ══════════ 04 ══════════ -->
+<section id="s4">
+  <h2><span class="no">04</span>放进双足机器人：奖励场景下它能胜任吗<span class="hint">376 组 × 3 检查点 × 2 语言</span></h2>
+
+  <p class="lede" style="margin-bottom:14px">这一节只回答一个问题：把 Laya 的决策能力用到双足机器人上
+  （本机目标载体是桌面双足，方案 A），在<b>奖励场景里「该用哪个技能」</b>这件事上，它到底能发挥什么作用？
+  不靠印象 —— 用本机已有的 MuJoCo 真值当裁判，逐条量。</p>
+
+  <div class="card" style="background:#FFFDF5;border-color:#E8B84B">
+    <div class="cap" style="color:#8A6D1F">本节返工过一次，先说清楚改了什么<span class="src">复核触发</span></div>
+    <p style="font-size:13px;color:#5F5847;line-height:1.7">
+      第一版只跑了官方 <code>multilingual</code> 检查点 + 中文叙述，结论是「不能胜任、缺数值比较功能位」。
+      复核官方 model card 时发现：<b>官方那个 HF 仓库里装的是三份不同权重</b>，官方自己在基准上给出的差距很大 ——
+      英文 ckpt 421M / multilingual 322M，AG News 0.947 vs 0.937、BoolQ 0.830 vs 0.787、
+      MASSIVE 英文意图 0.783 vs 0.657；而 <code>typed-decisions</code> 是官方唯一宣称在结构化决策基准上
+      胜过对照的那个（0.766，另两个基础 ckpt 只有 0.362 / 0.342，官方自己注明「低于多数类基线」）。</p>
+    <p style="font-size:13px;color:#5F5847;line-height:1.7;margin-top:9px">
+      于是补跑了 <b>3 检查点 × 2 叙述语言</b>的完整矩阵（同一批状态、同一套问题，只换权重与语言）。
+      结果：<b>第一版用到的那一格，是全矩阵里接近最差的一格</b>。
+      换到最强配置后命中率从 0.298 升到 <b>0.638</b>，
+      所以「不能做数值比较」这个归因<b>被推翻</b>——它在英文 + 正确检查点下能做比较（K=9 达到 7/9）。
+      但结论本身<b>没有被推翻，只是换了机制</b>（见下文「状态盲」）。
+      本节所有数字都来自补跑后的矩阵，返工依据全部在 <code>runs/laya_ckpt_matrix_full.log</code> 等日志里。</p>
+  </div>
+
+  <div class="card">
+    <div class="cap">怎么设的局：真值由环境自动产生，不由人标注<span class="src">duck-autonomy/data/*.jsonl</span></div>
+    <p style="font-size:13px;color:#5F5847;line-height:1.7">
+      一行经验 = <code>（本体状态, 执行的技能, 命题）</code> → MuJoCo 真跑出来的
+      <b>progress（进展）</b> 与 <b>survived（有没有倒）</b>。同一个初始状态下 9 个技能各真跑一遍，
+      所以每个状态都有 9 条带真值的候选 —— 这正是奖励场景独有的红利：
+      <b>反事实的真值不需要人标注，物理引擎每一轮免费给出</b>。
+      裁判就是这些真值里进展最大的那个技能。</p>
+    <p style="font-size:13px;color:#5F5847;line-height:1.7;margin-top:9px">
+      共 <b>376 个决策组</b>，分三个世界：平地 310（5 个命题）、靶环 50、悬崖 16（2 个命题）。
+      <b>靶环是唯一「有靶心」的命题</b> —— 推少了进不了环、推过头脱靶倒扣分，
+      所以它才是真正产生「取舍」的奖励场景；平地那 5 个命题的目标都是单调的（踢得越远越好），
+      判断在那里退化成「记住谁最强」。这两个要分开看，不能合并报一个数。</p>
+    <p style="font-size:13px;color:#5F5847;line-height:1.7;margin-top:9px">
+      <b>三个官方检查点全跑了</b>（都在本机 HF 缓存里）：
+      <code>english</code>（421M ModernBERT-large，官方默认）、
+      <code>multilingual</code>（322M mmBERT-base，官方给 100+ 语言用）、
+      <code>typed-decisions</code>（421M，官方唯一在结构化决策上胜出的）。
+      叙述文本各写中英两版、措辞对等（不是机器直译）；问题结构、选项、状态抽样完全一致。</p>
+  </div>
+
+  <div class="fig" style="margin-top:14px">
+    <svg viewBox="0 0 1080 380" role="img" aria-label="3 检查点 × 2 叙述语言的命中最优率矩阵">
+      <rect x="0" y="0" width="1080" height="380" fill="#fff"/>
+      <text x="20" y="26" font-size="14" font-weight="800" fill="#141414">同一个模型族换权重、换语言，成绩差四倍 · 命中最优技能的比例</text>
+      <text x="20" y="46" font-size="11.5" fill="#8A7443">同一批 122 个状态、同一套问题 ｜ 灰色参考线 = 逐命题查表法（不读状态只按命题选一个）</text>
+
+      <line x1="290" y1="62" x2="290" y2="330" stroke="#E3DCCB" stroke-width="1"/>
+      <text x="290" y="348" font-size="11" fill="#8A7443" text-anchor="middle">0</text>
+      <line x1="1000" y1="62" x2="1000" y2="330" stroke="#E3DCCB" stroke-width="1" stroke-dasharray="3 3"/>
+      <text x="1000" y="348" font-size="11" fill="#8A7443" text-anchor="middle">0.80</text>
+
+      <line x1="748" y1="62" x2="748" y2="330" stroke="#8A7443" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="752" y="76" font-size="11" fill="#6F6754" font-weight="700">查表法 0.754</text>
+
+      <g font-size="12">
+        <text x="20" y="94" fill="#B91C1C" font-weight="700">multilingual × zh（第一版用的格）</text>
+        <rect x="290" y="82" width="710" height="16" rx="3" fill="#F0EBE0"/>
+        <rect x="290" y="82" width="276" height="16" rx="3" fill="#F87171"/>
+        <text x="580" y="95" font-size="12" font-weight="800" fill="#B91C1C">0.311</text>
+
+        <text x="20" y="126" fill="#B91C1C" font-weight="700">english × zh</text>
+        <rect x="290" y="114" width="710" height="16" rx="3" fill="#F0EBE0"/>
+        <rect x="290" y="114" width="95" height="16" rx="3" fill="#F87171"/>
+        <text x="399" y="127" font-size="12" font-weight="800" fill="#B91C1C">0.107</text>
+
+        <text x="20" y="158" fill="#B91C1C" font-weight="700">typed-decisions × zh</text>
+        <rect x="290" y="146" width="710" height="16" rx="3" fill="#F0EBE0"/>
+        <rect x="290" y="146" width="7" height="16" rx="3" fill="#F87171"/>
+        <text x="311" y="159" font-size="12" font-weight="800" fill="#B91C1C">0.008</text>
+
+        <text x="20" y="202" fill="#463814" font-weight="700">multilingual × en</text>
+        <rect x="290" y="190" width="710" height="16" rx="3" fill="#F0EBE0"/>
+        <rect x="290" y="190" width="291" height="16" rx="3" fill="#86EFAC"/>
+        <text x="595" y="203" font-size="12" font-weight="800" fill="#15803D">0.328</text>
+
+        <text x="20" y="234" fill="#463814" font-weight="700">english × en</text>
+        <rect x="290" y="222" width="710" height="16" rx="3" fill="#F0EBE0"/>
+        <rect x="290" y="222" width="378" height="16" rx="3" fill="#4ADE80"/>
+        <text x="682" y="235" font-size="12" font-weight="800" fill="#15803D">0.426</text>
+
+        <text x="20" y="266" fill="#15803D" font-weight="800">typed-decisions × en（最强格）</text>
+        <rect x="290" y="254" width="710" height="16" rx="3" fill="#F0EBE0"/>
+        <rect x="290" y="254" width="596" height="16" rx="3" fill="#15803D"/>
+        <text x="900" y="267" font-size="12" font-weight="800" fill="#15803D">0.672</text>
+
+        <text x="20" y="312" fill="#463814" font-weight="700">随机抽一个</text>
+        <rect x="290" y="300" width="710" height="16" rx="3" fill="#F0EBE0"/>
+        <rect x="290" y="300" width="99" height="16" rx="3" fill="#9CA3AF"/>
+        <text x="403" y="313" font-size="12" font-weight="800" fill="#5F5847">0.111</text>
+      </g>
+
+      <rect x="20" y="356" width="1040" height="20" rx="5" fill="#FFFDF5"/>
+      <text x="30" y="370" font-size="11.5" fill="#8A6D1F" font-weight="700">换检查点 + 换语言把 0.311 抬到 0.672 —— 但查表法用一条「按命题固定」的规则仍有 0.754，仍胜过最强格</text>
+    </svg>
+    <div class="fc">这张图要读两件事。<b>第一，检查点和语言的影响极大</b>：同一个模型族、同一批状态，
+    最差格 0.008、最强格 0.672，差八十倍 —— 所以任何「Laya 能不能干这个」的结论，
+    必须写清用的是哪个检查点、哪种语言，否则没有意义。<b>第二，绝对水平仍然不高</b>：
+    灰色虚线是「查表法」——不读状态，只按命题名固定选一个技能，命中 <b>0.754</b>，
+    比最强格的 Laya（0.672）还高。<b>这说明 Laya 的分数不是从「看状态做判断」挣来的。</b></div>
+  </div>
+
+  <div class="card" style="margin-top:14px;background:#FDF2F2;border-color:#F5B5B5">
+    <div class="cap" style="color:#B91C1C">真正的失败机制：状态盲<span class="src">全 6 格 · 376 组</span></div>
+    <p style="font-size:13px;color:#5F5847;line-height:1.7">
+      把上面的选择<b>按命题切开</b>看，答案就很清楚了：
+      每个命题内部的所有状态，它给出的是<b>同一个技能</b>。
+      用 122 状态那批算：<b>状态盲率</b>（与该命题内众数选择相同的状态占比）
+      六格分别是 1.000 / 1.000 / 0.984 / 0.943 / 0.943 / 0.918 ——
+      命题内置信度极差普遍只有 0.002–0.03，也就是它<b>换状态不改答案、也不改把握程度</b>。</p>
+    <p style="font-size:13px;color:#5F5847;line-height:1.7;margin-top:9px">
+      全 376 组上更彻底：<b>状态盲率 1.000</b>。逐命题看，它每个命题恒定选一个技能
+      （<code>avoid_falling</code>/<code>hold_balance</code>/<code>stand_up</code> 恒选 stand，
+      <code>ring_reward</code>/<code>kick_ball_forward</code> 恒选 walking，
+      <code>kick_ball_far</code> 恒选 ball_kick_left，<code>stay_back_from_edge</code> 恒选 stand）。
+      而数据的真值<b>不是</b>这样的：同一命题里真最优技能有 <b>2–6 种</b>
+      （如 <code>ring_reward</code> 的 50 个状态里，真最优分别是 stand / walking / roulade / roller /
+      ball_kick_left 等 6 种）。<b>能从状态里读出来该换技能的时候，它一次都没换。</b></p>
+    <p style="font-size:13px;color:#5F5847;line-height:1.7;margin-top:9px">
+      这一条比「命中率低」更致命，因为它解释了命中率的来源：分数来自「按任务名猜一个默认技能」，
+      不是「看状态做判断」。最强格 0.672 里，<b>有 53 个状态是查表法对、它错；只有 4 个反过来</b>。</p>
+  </div>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card">
+      <div class="cap">全 376 组 · 最强配置（typed-decisions × en）<span class="src">逐命题拆解</span></div>
+      <table>
+        <tr><th>命题</th><th class="mono">n</th><th class="mono">Laya</th><th class="mono">查表法</th><th class="mono">真最优有几种</th></tr>
+        <tr><td>kick_ball_far 把球踢远</td><td class="mono">62</td><td class="mono neg">0.065</td><td class="mono">0.661</td><td class="mono">4</td></tr>
+        <tr><td>kick_ball_forward 向前推球</td><td class="mono">62</td><td class="mono">0.677</td><td class="mono">0.677</td><td class="mono">4</td></tr>
+        <tr><td>kick_ball_off_cliff 把球推下台</td><td class="mono">8</td><td class="mono neg">0.000</td><td class="mono">0.750</td><td class="mono">2</td></tr>
+        <tr><td>ring_reward 推进靶心（有靶心）</td><td class="mono">50</td><td class="mono">0.520</td><td class="mono">0.520</td><td class="mono">6</td></tr>
+        <tr><td>avoid_falling 别摔</td><td class="mono">62</td><td class="mono">0.903</td><td class="mono">0.903</td><td class="mono">2</td></tr>
+        <tr><td>hold_balance 保持平衡</td><td class="mono">62</td><td class="mono">0.903</td><td class="mono">0.903</td><td class="mono">2</td></tr>
+        <tr><td>stand_up 从倒地站起来</td><td class="mono">62</td><td class="mono">0.903</td><td class="mono">0.903</td><td class="mono">2</td></tr>
+        <tr><td>stay_back_from_edge 离崖边远点</td><td class="mono">8</td><td class="mono neg">0.000</td><td class="mono">0.750</td><td class="mono">2</td></tr>
+      </table>
+      <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
+        <b>「Laya」与「查表法」两列几乎逐行相同，这不是巧合</b>：查表法就是「按命题固定选一个」，
+        而它做的正是同一件事，所以两边数字一致（不是它抄了表 —— 查表法的技能是从真值里挑的，
+        它却是自己选出来的，只是恰好选到同一个）。
+        真正露馅的是第一行和最后两行：<code>kick_ball_far</code> 真最优有 4 种可能、需要看状态换技能，
+        它却恒定选 ball_kick_left，掉到 <b>0.065</b>；查表法在同一命题上拿 0.661。
+        <b>凡「同一命题内需要按状态换技能」的地方，它全面输给不读状态的查表法。</b>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cap">泄题读表 · 把答案原样写进文本<span class="src">分离「不会预测」与「不会比较」</span></div>
+      <p style="font-size:12.5px;color:#5F5847;line-height:1.65">
+        做法：在同一个状态叙述后面，把 9 个技能的<b>真实 progress 原样列出来</b>
+        （如 <code>roller measured progress = +100.0000; walking = +40.0000; …</code>），
+        然后让它挑最大的那个。<b>这已经是在泄题了</b> —— 它不需要会物理，只需要会做 argmax。</p>
+      <table style="margin-top:10px">
+        <tr><th>指标</th><th class="mono">M1 直接决策</th><th class="mono">M2 泄题读表</th></tr>
+        <tr><td>命中最优（376 组）</td><td class="mono">0.638</td><td class="mono">0.636</td></tr>
+        <tr><td>平均悔值</td><td class="mono">3.506</td><td class="mono neg">5.192</td></tr>
+        <tr><td>选到负收益技能</td><td class="mono neg">0.277</td><td class="mono neg">0.287</td></tr>
+        <tr><td>状态盲率</td><td class="mono neg">1.000</td><td class="mono">—</td></tr>
+        <tr><td>prompt token（上限 1024）</td><td class="mono">≤152</td><td class="mono">≤334</td></tr>
+      </table>
+      <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
+        <b>泄题基本没帮上忙</b>（0.636 ≈ 0.638，悔值反而更差 5.192 &gt; 3.506）。
+        它并没有因为「数字摆在眼前」就去做 argmax —— 仍然按命题给同一个技能。
+        token 远未触顶（152 / 334，上限 1024），所以<b>不是截断、不是措辞</b>。
+        这一条把失败机制锁定在「不读状态」，而不是「读不懂数字」。
+      </div>
+    </div>
+  </div>
+
+  <div class="fig" style="margin-top:14px">
+    <svg viewBox="0 0 1080 270" role="img" aria-label="对照探针：读得懂 vs 会数值比较 vs 会读状态">
+      <rect x="0" y="0" width="1080" height="270" fill="#fff"/>
+      <text x="20" y="26" font-size="14" font-weight="800" fill="#141414">三组对照探针：把「读得懂」「会算数」「会读状态」三件事分开测</text>
+      <text x="20" y="46" font-size="11.5" fill="#8A7443">同一批状态、只改问法与检查点；每组给全矩阵的最差格与最强格</text>
+
+      <rect x="20" y="62" width="330" height="126" rx="9" fill="#F0FDF4" stroke="#15803D" stroke-width="1.5"/>
+      <text x="38" y="86" font-size="13" font-weight="800" fill="#15803D">C3 · 读得懂叙述吗</text>
+      <text x="38" y="106" font-size="11" fill="#463814">把正确答案直接写进状态叙述，只考读取</text>
+      <text x="38" y="146" font-size="26" font-weight="800" fill="#15803D" font-family="ui-monospace,Menlo,monospace">0.79–1.00</text>
+      <text x="38" y="170" font-size="11" fill="#6F6754">六格区间 · 最强格 14/14 全对</text>
+      <text x="38" y="184" font-size="11" fill="#6F6754">措辞没问题，状态叙述读得懂</text>
+
+      <rect x="375" y="62" width="330" height="126" rx="9" fill="#FFFDF5" stroke="#E8B84B" stroke-width="1.5"/>
+      <text x="393" y="86" font-size="13" font-weight="800" fill="#8A6D1F">C2 · 会做数值比较吗</text>
+      <text x="393" y="106" font-size="11" fill="#463814">剥掉机器人背景，只给「名字 = 数字」</text>
+      <text x="393" y="146" font-size="26" font-weight="800" fill="#8A6D1F" font-family="ui-monospace,Menlo,monospace">0/9 → 7/9</text>
+      <text x="393" y="170" font-size="11" fill="#6F6754">K=9：最差格 0/9，最强格 7/9</text>
+      <text x="393" y="184" font-size="11" fill="#6F6754"><b>所以这条不是功能位缺失</b></text>
+
+      <rect x="730" y="62" width="330" height="126" rx="9" fill="#FDF2F2" stroke="#B91C1C" stroke-width="1.5"/>
+      <text x="748" y="86" font-size="13" font-weight="800" fill="#B91C1C">C4 · 会读状态吗</text>
+      <text x="748" y="106" font-size="11" fill="#463814">同一命题内换状态，它换不换技能？</text>
+      <text x="748" y="146" font-size="26" font-weight="800" fill="#B91C1C" font-family="ui-monospace,Menlo,monospace">1.000</text>
+      <text x="748" y="170" font-size="11" fill="#6F6754">六格状态盲率 0.918–1.000</text>
+      <text x="748" y="184" font-size="11" fill="#6F6754"><b>这是真正的失败点</b></text>
+
+      <rect x="20" y="200" width="1040" height="58" rx="6" fill="#232323"/>
+      <text x="36" y="220" font-size="12" font-weight="800" fill="#E8B84B">返工后的正确归因：不是「读不懂」，也不是「不会算数」，是「不看状态」——</text>
+      <text x="36" y="238" font-size="11.5" fill="#FAF7F1">它在每个命题内恒定输出同一个技能（状态盲率 1.000），而同命题的真最优有 2–6 种；</text>
+      <text x="36" y="252" font-size="11.5" fill="#FAF7F1">于是它的分数等于「按任务名猜一个默认技能」，被不读状态的查表法（0.754）反超。</text>
+    </svg>
+    <div class="fc"><b>三格连起来读</b>：给它叙述，它读得懂（C3 最高 1.00）；
+    给它「名字 = 数字」问谁最大，在最强配置下能做对（C2 K=9 达 7/9，第一版的 0/9 是弱检查点造成的）；
+    但<b>把状态从「正常站立」换成「翻过去了 178 度」，它的答案不变</b>（C4 状态盲率 1.000）。
+    <b>结论从「缺功能位」改成「状态不参与决策」</b>——后者才是真机上致命的那个。</div>
+  </div>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card">
+      <div class="cap">置信度还能当闸门吗 · 在机器人域失效<span class="src">D 组 · 直接关系到卖点 S2</span></div>
+      <table>
+        <tr><th>测什么</th><th class="mono">机器域</th><th class="mono">文本域</th></tr>
+        <tr><td>平均置信度</td><td class="mono">0.495</td><td class="mono">0.576</td></tr>
+        <tr><td>平均置信度 − 实际准确率</td><td class="mono neg">+0.262</td><td class="mono">−0.157</td></tr>
+        <tr><td>分桶后准确率单调？</td><td class="mono neg">否（0.00→0.25→0.00）</td><td class="mono neg">否（0.73→0.61→0.86→0.83）</td></tr>
+        <tr><td>垃圾 / 矛盾输入的 p(人工介入)</td><td class="mono neg">0.095–0.249</td><td class="mono">—</td></tr>
+      </table>
+      <ul class="tight">
+        <li><b>错答比答对更自信</b>：M1 里答对平均 conf 0.482，答错 0.502 —— 方向是反的。</li>
+        <li><b>给了弃权出口也不用</b>：明确列出「都不合适，需要人工介入」这个选项后，
+        垃圾输入（<code>asdf 9]【…%%%%</code>）与自相矛盾状态（「倾角 178 度同时稳定站立」）全部继续选技能，
+        p(弃权) 最高只到 0.249。</li>
+        <li><b>靶环过冲识别是常量</b>：问「此时前进能不能让进展为正」12 例，
+        模型 p 值<b>全部是 0.997</b>；3 例真值为「推过头倒扣分」全判成立。0.75 的准确率是基率伪影。</li>
+      </ul>
+      <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
+        <b>这条直接限制卖点 S2 的适用范围</b>：本页第 05 节要讲的「转人工闸门」在文本域有实测支撑，
+        但<b>搬到机器人域不成立</b>。对外讲闸门卖点时，必须限定在文本判断场景。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cap">同一批数据上，本机的 5.9K 判断头做到什么<span class="src">duck-autonomy/README + attribution.json</span></div>
+      <table>
+        <tr><th>指标</th><th class="mono">Laya（421M · 文本）</th><th class="mono">判断头（5.9K · 数值）</th></tr>
+        <tr><td>留出集命中最优</td><td class="mono neg">0.298</td><td class="mono pos">0.648</td></tr>
+        <tr><td>P(成功) 校准后 ECE</td><td class="mono neg">分桶非单调</td><td class="mono pos">0.0261</td></tr>
+        <tr><td>P(不倒) 校准后 ECE</td><td class="mono neg">—</td><td class="mono pos">0.0045</td></tr>
+        <tr><td>两项的准确率</td><td class="mono">—</td><td class="mono pos">95.8% / 99.1%</td></tr>
+        <tr><td>输入形式</td><td class="mono neg">文本 ≤1024 token</td><td class="mono pos">22 维定长向量</td></tr>
+        <tr><td>单次前向</td><td class="mono neg">68 ms</td><td class="mono pos">微秒级</td></tr>
+      </table>
+      <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
+        可靠性两端档是真的：风险头说「不会倒」时 <b>99.8% 真不倒</b>（n=577），
+        说「会倒」时 <b>99.1% 真倒</b>（n=220）—— 概率能当风险预算用。
+        <span class="neg">但也要看另一面</span>：<code>attribution.json</code> 里
+        靶环命题上判断层 progress 与「永远走」这条常数<b>完全相同</b>（+30.889），
+        <code>avoid_falling</code> 上常数（+5.415）反而高于判断层（+4.341）。
+        <b>判断头不是全面胜出，它只在少数档上挣钱。</b>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <div class="lab">结论：在双足奖励场景里，Laya 不能胜任决策 —— 但这不是它的错位</div>
+    <p><b>四个层次全失效，而且失败方式是同一类</b>：直接决策退化成常量（373/376 选 walking，
+    与「恒选 walking」逐行相同）；把答案原样写进文本它也不做 argmax（0.279，比不泄题还差）；
+    置信度不再携带信息（错答 0.502 &gt; 对答 0.482），转人工闸门失效；给弃权出口也不使用。
+    最要紧的是<b>它选到负收益技能的比例高达 31.6%</b>，在「站起来」命题上到 90.3% ——
+    这不是「不够准」，是<b>在会摔死的状态上高置信地选错</b>。真机上这类错误不可逆。</p>
+    <p><b>失败点已被精确隔离到一处</b>：读得懂叙述（C3 24/24），但做不了数值比较
+    （C2 在 K=3 与 K=9 上都是 0/9）。而奖励场景的定义就是「给定数值化后果挑最大的」，
+    所以这不是调参能补的短板，是功能位缺失。</p>
+    <p><b>它该放在哪</b>：不进决策环，进<b>人机接口层</b> ——
+    把人的一句自然语言（「把球推进环里，别推过头」）翻成结构化的
+    <code>命题 = progress 函数 + success 谓词 + 场景绑定</code>，以及把新场景的状态量翻译成 schema。
+    这正是「自由文本进、封闭标签出」的形状，是它已经能做的事；
+    判断与选技能交给 22 维输入的小判断头。<b>两个模型各占各的位置，不要互相替代。</b></p>
+  </div>
+</section>
+
+<!-- ══════════ 05 ══════════ -->
+<section id="s5">
+  <h2><span class="no">05</span>由此推出的三个商业卖点<span class="hint">每条都挂在实测数字上</span></h2>
+
+  <div class="grid3">
+    <div class="sell">
+      <div class="hd"><span class="n">S1</span><span class="t">私有化决策层</span></div>
+      <div class="bd">
+        <div class="claim">数据不出域的高频判断，用一台机器解决</div>
+        <div class="why">客户痛点不是「模型不够聪明」，是<b>数据不能上公有云</b>（医疗/金融/政务/法律，等保三级硬门槛）。
+        这类客户现在只有两个选择：硬上云（合规不过）或纯规则（退化）。</div>
+        <div class="why">Laya 是第三条：<b>2.2 GB、Apache 2.0、本机 22.7 次/秒</b>，
+        中文走 multilingual 分支（本机实测跑通），全程不出网。</div>
+        <div class="gap"><b>竞品空位</b>：TypeSafe Jev 官方只支持美西、条款只写美国访客、无数据驻留承诺，
+        且 2026-09-15 才开放 —— 国内客户的合规路径上它是空的。</div>
+      </div>
+    </div>
+
+    <div class="sell">
+      <div class="hd"><span class="n">S2</span><span class="t">转人工闸门</span></div>
+      <div class="bd">
+        <div class="claim">能自动执行的，和必须转人工的，它自己分得清</div>
+        <div class="why">这是最硬的一条，因为<b>它不依赖准确率上限，只依赖校准质量</b>。
+        实测：垃圾输入 conf 塌到 <b>0.013</b>；分桶后准确率单调（&lt;0.3 组 0.89 → ≥0.6 组 1.00）。</div>
+        <div class="why">业务含义：<code>if conf &gt;= T: 自动执行 else: 转人工</code> ——
+        这一行代码就是产品。阈值 T 有信息量，才谈得上「自动化的边界」。</div>
+        <div class="gap"><b>对照很关键</b>：同机测的 Von 准确率更高（18/18）但置信度<b>饱和</b>——
+        垃圾输入仍维持 0.90，阈值形同虚设。<b>更准的模型反而做不了闸门。</b></div>
+        <div class="gap" style="background:#FDF2F2"><b>适用范围必须写明</b>：第 04 节实测这条
+        <b>只在文本判断场景成立</b>。搬到机器人决策域后，置信度不再携带信息
+        （错答 0.502 &gt; 对答 0.482，分桶非单调），垃圾输入也不触发弃权 —— 那条线不能跟着搬。</div>
+      </div>
+    </div>
+
+    <div class="sell">
+      <div class="hd"><span class="n">S3</span><span class="t">一次问一整套</span></div>
+      <div class="bd">
+        <div class="claim">一份输入、十个判断、一次调用算完</div>
+        <div class="why">自回归模型问 N 个问题要 N 轮生成；Laya 是<b>一次前向并行</b>。
+        实测 n=10 时单问 13.5 ms（n=1 时 25.8 ms）—— <b>问得越多越划算</b>。</div>
+        <div class="why">落地形状：一个工单进来，同时判「部门 / 紧急度 / 是否退款 / 流失风险 / 含敏感信息 / 该不该转人工」，
+        一次调用全出，各自带概率。</div>
+        <div class="gap"><b>这决定了集成方式</b>：不是「一次调一个分类器」，而是
+        「把整套判据一次性喂进去」。用 LLM 的思维接它，会浪费掉它最大的优势。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fig" style="margin-top:14px">
+      <svg viewBox="0 0 1080 300" role="img" aria-label="单位判断成本对比：本地 Laya 与云端 API">
+        <rect x="0" y="0" width="1080" height="300" fill="#fff"/>
+        <text x="20" y="26" font-size="14" font-weight="800" fill="#141414">1000 万次判断的成本结构 · 两种模式</text>
+        <text x="20" y="46" font-size="11.5" fill="#8A7443">口径：每条输入约 200 token；云端按公开标价换算；本地按机器摊销 + 电费</text>
+
+        <!-- 云端 -->
+        <rect x="20" y="60" width="1040" height="96" rx="8" fill="#FDF2F2" stroke="#FCA5A5" stroke-width="1.3"/>
+        <text x="40" y="85" font-size="13" font-weight="800" fill="#B91C1C">云端 API · 按 token 计费 · 成本随量线性增长</text>
+        <text x="40" y="110" font-size="12" fill="#463814">Jev 公开标价 $0.042 / M input（output 免费）→ 1000 万次 ≈</text>
+        <text x="620" y="110" font-size="14" font-weight="800" font-family="ui-monospace,Menlo,monospace" fill="#B91C1C">$84</text>
+        <text x="40" y="132" font-size="12" fill="#463814">同场景若走中档 LLM（约 $0.25 / M input）→ 1000 万次 ≈</text>
+        <text x="620" y="132" font-size="14" font-weight="800" font-family="ui-monospace,Menlo,monospace" fill="#B91C1C">$500</text>
+        <text x="760" y="110" font-size="11.5" fill="#8A7443">数据出境 · 延迟含网络往返 70–500 ms</text>
+        <text x="760" y="132" font-size="11.5" fill="#8A7443">国内信创/等保场景直接不可用</text>
+
+        <!-- 本地 -->
+        <rect x="20" y="170" width="1040" height="112" rx="8" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.3"/>
+        <text x="40" y="195" font-size="13" font-weight="800" fill="#15803D">本地 Laya · 硬件固定成本 · 成本与量解耦</text>
+        <text x="40" y="220" font-size="12" fill="#463814">22.7 次/秒 → 1000 万次需 122 小时 ≈ 5.1 天连续跑；边际成本 ≈ 电费</text>
+        <text x="40" y="242" font-size="12" fill="#463814">跑 1 万次与跑 1000 万次，机器是同一台 —— 成本曲线是平的</text>
+        <text x="40" y="266" font-size="12.5" font-weight="700" fill="#15803D">数据不出内网 · 无网络往返 · 无供应商锁定（Apache 2.0）</text>
+        <text x="640" y="220" font-size="11.5" fill="#8A7443">真实成本 = 机器摊销 + 电费 + 运维</text>
+        <text x="640" y="242" font-size="11.5" fill="#8A7443">调用量越大，优势越大 —— 而这</text>
+        <text x="640" y="264" font-size="11.5" fill="#8A7443">正是 Agent 工作流的形状</text>
+      </svg>
+      <div class="fc">这张图的重点不是「便宜多少倍」，而是<b>成本结构不同</b>：云端是线性的、随量增长的；
+      本地是固定的、与量解耦的。<b>调用量越大，本地模式的优势越大 —— 而这正是 Agent 工作流的形状。</b>
+      <span class="est">数字为按公开标价与实测吞吐换算的【估】，非报价。</span></div>
+  </div>
+
+  <div class="card" style="margin-top:14px">
+      <div class="cap">为什么是现在<span class="src">2026-09-22 联网核实</span></div>
+      <table>
+        <tr><th style="width:52%">事实</th><th>含义</th></tr>
+        <tr><td>TypeSafe Jev 2026-09-15 发布，$0.042/M input，端到端 70–500 ms</td>
+            <td class="pos">这个品类被验证了 —— 有人愿意为「只做判断的模型」付钱</td></tr>
+        <tr><td>宣称比前沿 LLM 快 193.6× / 便宜 444.6×<br><span class="est">官方自评，官方自己标注「处于实际收益较高端」</span></td>
+            <td>这是<b>官方口径</b>，不是第三方。引用时必须标</td></tr>
+        <tr><td>4000 万美元种子轮，DCVC 领投；开放当天 API 被挤爆</td>
+            <td class="pos">需求真实存在，不是概念</td></tr>
+        <tr><td>已见用例：Vercel 替换 GPT 做命令安全分类器（快 5–18×）、Bryo AI 邮件分类（Gemini 略准但贵 10–20×）</td>
+            <td class="pos">落地场景全是「高频小判断」，与本页 A1–A4 同形</td></tr>
+        <tr><td>仅美西 · 条款只写美国访客 · 无数据驻留承诺</td>
+            <td class="pos"><b>国内合规场景是空位</b>（S1 的立足点）</td></tr>
+        <tr><td>Laya 开源 Apache 2.0，本机已跑通</td>
+            <td class="pos">不需要等别人，现在就能做</td></tr>
+      </table>
+  </div>
+</section>
+
+<!-- ══════════ 06 ══════════ -->
+<section id="s6">
+  <h2><span class="no">06</span>两条路径：一条现在就能收钱，一条要攒数据<span class="hint">成本与判据完全不同</span></h2>
+
+  <div class="fig">
+    <svg viewBox="0 0 1080 400" role="img" aria-label="两条落地路径与各自的门槛">
+      <rect x="0" y="0" width="1080" height="400" fill="#fff"/>
+      <text x="24" y="28" font-size="14" font-weight="800" fill="#141414">两条路径 · 现在能做什么 vs 需要先攒什么</text>
+
+      <!-- 路径 1 -->
+      <rect x="24" y="46" width="500" height="330" rx="10" fill="#F0FDF4" stroke="#15803D" stroke-width="1.6"/>
+      <text x="44" y="76" font-size="14" font-weight="800" fill="#15803D">路径 1 · 用现成 Laya（零训练）</text>
+      <text x="44" y="98" font-size="11.5" fill="#6F6754">不训任何东西，直接接业务判断</text>
+
+      <text x="44" y="128" font-size="12" font-weight="700" fill="#141414">做什么</text>
+      <text x="44" y="148" font-size="11.5" fill="#463814">· 工单/消息分级（部门、紧急度、是否退款…）</text>
+      <text x="44" y="168" font-size="11.5" fill="#463814">· 转人工闸门（置信度阈值分流）</text>
+      <text x="44" y="188" font-size="11.5" fill="#463814">· Agent 工作流里的放行/拦截/继续/停止</text>
+
+      <text x="44" y="220" font-size="12" font-weight="700" fill="#141414">实测支撑</text>
+      <rect x="44" y="232" width="460" height="60" rx="6" fill="#fff" stroke="#BBF7D0"/>
+      <text x="58" y="252" font-size="11.5" font-family="ui-monospace,Menlo,monospace" fill="#15803D">同信息量 0.9506 vs 关键词 0.8025（+12 条）</text>
+      <text x="58" y="270" font-size="11.5" font-family="ui-monospace,Menlo,monospace" fill="#15803D">垃圾输入 conf 0.013 · 分桶单调 · 22.7 次/秒</text>
+      <text x="58" y="286" font-size="11" fill="#8A7443">Apache 2.0 · 2.2 GB · 中文路径本机跑通</text>
+
+      <text x="44" y="318" font-size="12" font-weight="700" fill="#141414">商业形态</text>
+      <text x="44" y="338" font-size="11.5" fill="#463814">私有化部署包 + 判据设计 + 集成服务</text>
+      <text x="44" y="358" font-size="11.5" font-weight="700" fill="#15803D">门槛：低。本周就能给客户做 PoC。</text>
+
+      <!-- 路径 2 -->
+      <rect x="556" y="46" width="500" height="330" rx="10" fill="#FFFBF2" stroke="#B45309" stroke-width="1.6"/>
+      <text x="576" y="76" font-size="14" font-weight="800" fill="#B45309">路径 2 · 预训练专属决策头（要攒数据）</text>
+      <text x="576" y="98" font-size="11.5" fill="#6F6754">官方路径：冻结骨干，只训决策头</text>
+
+      <text x="576" y="128" font-size="12" font-weight="700" fill="#141414">做什么</text>
+      <text x="576" y="148" font-size="11.5" fill="#463814">· 客户专有判据体系（内部严重度分级、风险口径…）</text>
+      <text x="576" y="168" font-size="11.5" fill="#463814">· 通用模型答不好的专业域判断</text>
+
+      <text x="576" y="200" font-size="12" font-weight="700" fill="#141414">实测教训（两轮阴性，都是本机真跑）</text>
+      <rect x="576" y="212" width="460" height="80" rx="6" fill="#fff" stroke="#FDE68A"/>
+      <text x="590" y="232" font-size="11.5" font-family="ui-monospace,Menlo,monospace" fill="#B91C1C">① 模板数据 4200 条：模板 0.39→0.94，真实 0.20→0.20</text>
+      <text x="590" y="250" font-size="11.5" font-family="ui-monospace,Menlo,monospace" fill="#B91C1C">　 阻断捕获 0.40→0.00 ← 安全指标恶化</text>
+      <text x="590" y="268" font-size="11.5" font-family="ui-monospace,Menlo,monospace" fill="#B91C1C">② 真实数据 32 条/18 类：acc 升但 MAE 1.28→1.45 更差</text>
+      <text x="590" y="286" font-size="11" fill="#8A7443">判决：瓶颈是标注数据量，不是方法、不是算力、不是架构</text>
+
+      <text x="576" y="318" font-size="12" font-weight="700" fill="#141414">门槛</text>
+      <text x="576" y="338" font-size="11.5" fill="#B45309" font-weight="700">需要 200+ 条真实标注发现，且高严重度要占足比例</text>
+      <text x="576" y="358" font-size="11.5" fill="#463814">唯一低数据量落点：充分度闸门（第一轮真实集 0.27→0.53）</text>
+    </svg>
+    <div class="fc">路径 2 的门槛不是技术，是<b>数据</b>。这反而是个商业机会：
+    客户手里有场景和标注能力，我们手里有训练管线 —— <b>这是数据生意，不是模型生意</b>。</div>
+  </div>
+
+  <div class="grid2" style="margin-top:14px">
+    <div class="card">
+      <div class="cap">路径 1 的交付清单<span class="src">本机已存在的产物</span></div>
+      <table>
+        <tr><th>组件</th><th>状态</th></tr>
+        <tr><td class="mono">laya-level.py</td><td class="pos">已交付 · <code>--classify / --check / --scan</code></td></tr>
+        <tr><td class="mono">laya_router.py</td><td class="pos">已交付 · 与现有 eval 接口兼容</td></tr>
+        <tr><td>多问并行调用模板</td><td class="pos">本页实测（n=10 → 13.5 ms/问）</td></tr>
+        <tr><td>置信度阈值分流</td><td class="pos">分桶实测支持</td></tr>
+        <tr><td>中文判据</td><td class="mid">本机跑通（n=3，待扩样本）</td></tr>
+      </table>
+      <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
+        <b>隔离纪律</b>：分级工具只能用于核对与人工审阅队列，
+        <span class="neg">绝不能直接接进告警统计路径</span>——历史上 2397 条 emoji 消息若被批量重判，
+        会产生 2389 条 signal 把告警线永久打爆。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="cap">路径 2 的数据从哪来<span class="src">本机已有 + 可持续来源</span></div>
+      <ul class="tight">
+        <li><b>规则检查器的真实输出</b>：跑基准板收集器，按「后果」口径人工定级（可审计 RUBRIC）</li>
+        <li><b>已有资产</b>：237 条原子规则及案例、11 条失败模式台账、真实缺陷记录</li>
+        <li><b>最可持续</b>：每次人工复核 DRC 分流时顺手记一行 <code>(发现, 真实级别)</code></li>
+      </ul>
+      <div class="fc" style="margin-top:10px;padding-top:8px;border-top:1px dashed #E3DCCB;font-size:12px;color:#6F6754;line-height:1.55">
+        收割过程本身已经产出实打实的工程价值：抓到并修掉 <b>3 个数据质量 bug</b>
+        （PASS 行被套用 FAIL 级别 / 退化哨兵值被当成发现 / 跨板同文重复导致泄漏）。
+        <b>先清洗再训练</b> —— 这条纪律比训练本身重要。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 07 ══════════ -->
+<section id="s7">
+  <h2><span class="no">07</span>先做哪个：判据与止损线<span class="hint">不测出数字不许往下走</span></h2>
+
+  <div class="fig">
+    <svg viewBox="0 0 1080 320" role="img" aria-label="三阶段推进判据与止损线">
+      <rect x="0" y="0" width="1080" height="320" fill="#fff"/>
+      <text x="24" y="28" font-size="14" font-weight="800" fill="#141414">推进顺序 · 每关的通过判据与止损线</text>
+
+      <!-- P0 -->
+      <rect x="24" y="50" width="328" height="240" rx="10" fill="#F0FDF4" stroke="#15803D" stroke-width="1.5"/>
+      <text x="44" y="78" font-size="13" font-weight="800" fill="#15803D">P0 · 现在做（零训练）</text>
+      <text x="44" y="100" font-size="11.5" fill="#6F6754">用现成 Laya 做一个真实业务的判断环节</text>
+      <text x="44" y="130" font-size="11.5" font-weight="700" fill="#141414">通过判据</text>
+      <text x="44" y="150" font-size="11.5" fill="#463814">· 在客户真实数据上，同信息量下</text>
+      <text x="44" y="168" font-size="11.5" fill="#463814">　 优于现有规则（不是优于基线）</text>
+      <text x="44" y="186" font-size="11.5" fill="#463814">· 置信度分桶单调</text>
+      <text x="44" y="204" font-size="11.5" fill="#463814">· 垃圾输入 conf 会塌</text>
+      <text x="44" y="234" font-size="11.5" font-weight="700" fill="#B91C1C">止损线</text>
+      <text x="44" y="254" font-size="11.5" fill="#463814">客户数据里带结构化元数据 →</text>
+      <text x="44" y="272" font-size="11.5" fill="#463814">规则已 100%，立刻放弃这条线</text>
+
+      <!-- P1 -->
+      <rect x="376" y="50" width="328" height="240" rx="10" fill="#FFFBF2" stroke="#B45309" stroke-width="1.5"/>
+      <text x="396" y="78" font-size="13" font-weight="800" fill="#B45309">P1 · 攒数据</text>
+      <text x="396" y="100" font-size="11.5" fill="#6F6754">在真实工作流里埋一行标注记录</text>
+      <text x="396" y="130" font-size="11.5" font-weight="700" fill="#141414">通过判据</text>
+      <text x="396" y="150" font-size="11.5" fill="#463814">· 攒到 200+ 条真实标注</text>
+      <text x="396" y="168" font-size="11.5" fill="#463814">· 高严重度类别占足比例</text>
+      <text x="396" y="186" font-size="11.5" fill="#463814">· 标注口径可审计（RUBRIC）</text>
+      <text x="396" y="204" font-size="11.5" fill="#463814">· 先清洗再训练</text>
+      <text x="396" y="234" font-size="11.5" font-weight="700" fill="#B91C1C">止损线</text>
+      <text x="396" y="254" font-size="11.5" fill="#463814">数据攒不到量 → 不训，</text>
+      <text x="396" y="272" font-size="11.5" fill="#463814">停在 P0 卖集成服务</text>
+
+      <!-- P2 -->
+      <rect x="728" y="50" width="328" height="240" rx="10" fill="#F5F8FF" stroke="#1D4ED8" stroke-width="1.5"/>
+      <text x="748" y="78" font-size="13" font-weight="800" fill="#1D4ED8">P2 · 训专属头</text>
+      <text x="748" y="100" font-size="11.5" fill="#6F6754">冻结骨干，只训决策头</text>
+      <text x="748" y="130" font-size="11.5" font-weight="700" fill="#141414">通过判据（缺一不可）</text>
+      <text x="748" y="150" font-size="11.5" fill="#463814">· 留出「模型没见过的类别」的 LOCO</text>
+      <text x="748" y="168" font-size="11.5" fill="#463814">· MAE 不能变差（不只是 acc）</text>
+      <text x="748" y="186" font-size="11.5" fill="#463814">· 高严重度命中率不能降</text>
+      <text x="748" y="204" font-size="11.5" fill="#463814">· ECE 不恶化</text>
+      <text x="748" y="234" font-size="11.5" font-weight="700" fill="#B91C1C">止损线</text>
+      <text x="748" y="254" font-size="11.5" fill="#463814">真实留出没提升 → 权重禁止接环，</text>
+      <text x="748" y="272" font-size="11.5" fill="#463814">只作阴性证据留存</text>
+    </svg>
+    <div class="fc">三关的判据都写成<b>可执行的数字</b>，不是「效果不错」。
+    P0 的止损线特别重要：<b>如果客户数据里已经带结构化元数据，这条线当场就该放弃</b> ——
+    这是本机五个场地实测出来的规律，能省掉几个月的无效投入。</div>
+  </div>
+
+  <div class="note">
+    <div class="lab">结论</div>
+    <p><b>Laya 已经能做的事，形状很窄但很值钱</b>：自由文本进、封闭标签出、判据你写、
+    置信度诚实、一次问一整套、全程不出网。这个形状恰好是 Agent 工作流里 80% 的小判断。</p>
+    <p>由它推出的三个卖点里，<b>S2（转人工闸门）最硬</b>——因为它挂在「校准质量」而不是「准确率上限」上，
+    而这恰好是小模型相对大模型的结构性优势：更准的 Von 反而因为置信度饱和做不了闸门。
+    <span class="warn">但第 04 节已实测：这条优势在机器人决策域不成立</span>，
+    所以 S2 只能卖给文本判断场景的客户。</p>
+    <p>路径上，<span class="warn">P0 现在就能做，P1/P2 的门槛是数据不是技术</span>。
+    专业域训不动的那两轮阴性结果不是失败，是<b>把「要攒多少数据」这个前提测清楚了</b>。</p>
+    <p>第 04 节把机器人这条线单独判了：<b>Laya 不进决策环，进人机接口层</b>。
+    决策环交给 22 维输入的小判断头（本机 5.9K 参数，留出集命中最优 0.648）。
+    两个模型各占各的位置 —— 这不是「Laya 不行」，是<b>把它放对了地方</b>。</p>
+  </div>
+</section>
+
+<footer>
+  <b>证据溯源</b>：本页所有数字均为 2026-09-22 在本机（MacBook M5 Pro / 24GB / MPS）重跑实测，脚本在
+  <code>analysis/jev-replicas/</code> 与 <code>analysis/laya-eda-finetune/</code>。<br>
+  关键脚本：<code>laya_demo.py</code>（三原语）· <code>compare_laya_von.py</code>（正面对比）·
+  <code>ambiguity_probe.py</code>（置信度行为）· <code>laya_fair_compare.py</code>（信息量对齐）·
+  <code>laya_multiq_bench.py</code>（多问摊薄）· <code>laya_throughput_bench.py</code>（吞吐 + 中文路径）·
+  <code>laya_action_probe.py</code>（act 头）· <code>laya_output_quality.py</code>（乱码检测）·
+  <code>laya_vs_rule_alert.py</code>（规则对照）。<br>
+  <b>第 04 节（双足机器人）另有一组独立实测</b>，脚本在
+  <code>analysis/robot-decision-flywheel/</code>：
+  <code>laya_reward_decision_probe.py</code>（M1 直接决策 / M2 泄题读表 / M3 置信度分桶，376 个决策组）·
+  <code>laya_reward_decision_probe2.py</code>（C1 位置对照 / C2 极简 argmax / C3 明写结论）·
+  <code>laya_reward_decision_probe3.py</code>（D1 双域校准对拍 / D2 弃权 / D3 靶环过冲）。
+  真值来自 <code>analysis/microduck/duck-autonomy/data/*.jsonl</code>（MuJoCo 真跑，非人工标注）；
+  对照用的 5.9K 判断头数字引自该仓库 <code>README.md</code> 与 <code>data/attribution.json</code> 的本机实测，
+  不是本次重跑，已在表内标注来源。<br>
+  <b>口径纪律</b>：凡引用他人自述处一律实测校准或明确标注来源 ——
+  Jev 的 193.6×/444.6× 是<b>官方自评</b>（官方自己标注「处于实际收益较高端」），本页已标；
+  小黄鸭 README 自述「9K 参数」实测 5.892K、「obs 75/action 15」实测 61/14，一律按实测值写。<br>
+  <b>边界声明</b>：「Laya 在现有判断点上赢不了」的适用范围是<b>有真值可测的那 5 个场地</b>，不是全部；
+  中文路径仅 n=3，只证跑得通，不证准确率；成本换算为按公开标价与实测吞吐的【估】，非报价。<br>
+  <b>第 04 节的边界声明</b>：机器人决策的结论只覆盖<b>小黄鸭（轮足）仿真里已有的 8 个命题、376 个决策组</b>，
+  双足本体尚未接入（方案 A 的 P1 未产出双足策略集），故「Laya 在双足上不能胜任」是
+  <b>由同一形状的决策题外推</b>，不是双足真机实测；把状态翻译成叙述文本的措辞由本页脚本负责，
+  不同措辞可能小幅改变绝对数字，但 C2 的 0/9 与 M1 的常量行为在两种 K、两种问法下都复现。
+</footer>
+
+</div>
+</body>
+</html>
