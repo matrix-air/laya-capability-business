@@ -4,7 +4,7 @@
 
 - 线上地址：https://matrix-air.github.io/laya-capability-business/
 - 源文件：`Aurora/analysis/robot-decision-flywheel/laya-capability-and-business.html`
-- 本仓库 `index.html` 与源文件**逐字节相同**（sha256 `183c33efec7c1aa14bb809d1bf9358138dbad57f0191370182d9312967120e0b`）
+- 本仓库 `index.html` 与源文件**逐字节相同**（sha256 `2e77d857c39217dae2a4bbd12edf18efc34f46ba25935cd8cee1153b6e52d450`）
 
 ## 页面讲什么
 
